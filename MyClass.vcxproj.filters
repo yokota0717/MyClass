@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{83415416-ccaa-4a47-ac5c-ea70c31509da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Input">
+      <UniqueIdentifier>{e9269e80-21bc-4028-8356-7c667d3c8892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Figure">
+      <UniqueIdentifier>{4f797d61-bcf7-4cb0-836a-e7b0eaa5f7ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Figure">
+      <UniqueIdentifier>{8d7d075f-673b-41dc-ae6a-de621b1b2c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collision">
+      <UniqueIdentifier>{3a556652-8cf5-4459-bf09-0ba2ee9c91bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Input\keyboard.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Figure\Shape.cpp">
+      <Filter>ソース ファイル\Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Figure\Vec.cpp">
+      <Filter>ソース ファイル\Figure</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Input\keyboard.h">
+      <Filter>ヘッダー ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Collision\Collision.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Figure\Shape.h">
+      <Filter>ヘッダー ファイル\Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Figure\Vec.h">
+      <Filter>ヘッダー ファイル\Figure</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
