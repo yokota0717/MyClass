@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="include\Figure\Shape.cpp" />
     <ClCompile Include="include\Figure\Vec.cpp" />
     <ClCompile Include="include\Input\keyboard.cpp" />

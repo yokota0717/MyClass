@@ -28,6 +28,9 @@
     <Filter Include="ヘッダー ファイル\Collision">
       <UniqueIdentifier>{3a556652-8cf5-4459-bf09-0ba2ee9c91bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Collision">
+      <UniqueIdentifier>{135f5bf5-dc6e-468f-9f32-80fa5259c09d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -41,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="include\Figure\Vec.cpp">
       <Filter>ソース ファイル\Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
