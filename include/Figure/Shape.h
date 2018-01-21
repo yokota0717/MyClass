@@ -68,17 +68,17 @@ struct Circle {
 	}
 	bool Hit(const Circle& c) const {
 		//’†SŠÔ‚Ì‹——£‚ª“ñ‚Â‚Ì”¼Œa‚Ì˜a‚æ‚è¬‚³‚©‚Á‚½‚çtrue
-		float mx = pow(x - c.x, 2.0f);
-		float my = pow(y - c.y, 2.0f);
-		float mz = pow(z - c.z, 2.0f);
-		if (pow(mx + my + mz, 0.5f) <= (r + c.r)) return true;
+		float mx = powf(x - c.x, 2.0f);
+		float my = powf(y - c.y, 2.0f);
+		float mz = powf(z - c.z, 2.0f);
+		if (powf(mx + my + mz, 0.5f) <= (r + c.r)) return true;
 		return false;
 	}
 	bool Hit(const Vec& v) const {
-		float mx = pow(x - v.x, 2.0f);
-		float my = pow(y - v.y, 2.0f);
-		float mz = pow(z - v.z, 2.0f);
-		if (pow(mx + my + mz, 0.5f) <= r) return true;
+		float mx = powf(x - v.x, 2.0f);
+		float my = powf(y - v.y, 2.0f);
+		float mz = powf(z - v.z, 2.0f);
+		if (powf(mx + my + mz, 0.5f) <= r) return true;
 		return false;
 	}
 

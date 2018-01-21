@@ -45,7 +45,7 @@
     <ClCompile Include="include\Figure\Vec.cpp">
       <Filter>ソース ファイル\Figure</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="include\Collision\Collision.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
   </ItemGroup>
