@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="include\Collision\Collision.cpp" />
     <ClCompile Include="include\Figure\Shape.cpp" />
     <ClCompile Include="include\Figure\Vec.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Behavior.h" />
     <ClInclude Include="include\Collision\Collision.h" />
     <ClInclude Include="include\Figure\Shape.h" />
     <ClInclude Include="include\Figure\Vec.h" />
