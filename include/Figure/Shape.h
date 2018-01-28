@@ -83,3 +83,24 @@ struct Circle {
 	}
 
 };
+
+struct Triangle {
+	Vec v1, v2, v3;		//3頂点
+
+	Triangle(Vec v1, Vec v2, Vec v3) :
+		v1(v1), v2(v2), v3(v3)
+	{}
+
+};
+
+struct Orval {
+	float x, y;		//中心座標
+	float lr, sr;	//長軸、短軸	 long radius,shot radius
+	float angle;	//長軸のx軸からの傾き
+
+	Orval(float x,float y,float lr,float sr,float ang):
+		x(x),y(y),
+		lr(lr),sr(sr),
+		angle(ang)
+	{}
+};

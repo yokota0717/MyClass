@@ -54,9 +54,6 @@
     <ClCompile Include="include\Collision\Collision.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Behavior.cpp">
-      <Filter>ソース ファイル\Behavior</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Input\keyboard.h">
@@ -70,9 +67,6 @@
     </ClInclude>
     <ClInclude Include="include\Figure\Vec.h">
       <Filter>ヘッダー ファイル\Figure</Filter>
-    </ClInclude>
-    <ClInclude Include="Behavior.h">
-      <Filter>ヘッダー ファイル\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
