@@ -37,6 +37,12 @@
     <Filter Include="ソース ファイル\Behavior">
       <UniqueIdentifier>{50073c3e-1dbd-4901-b13d-440dc811f157}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Resource">
+      <UniqueIdentifier>{b5e6e7f2-6b11-42fd-9eed-a3cdef314927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Resource">
+      <UniqueIdentifier>{ea721fd2-efdd-4ab8-aae3-d5e81473e40f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -54,6 +60,9 @@
     <ClCompile Include="include\Collision\Collision.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="include\Resource\Resource.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Input\keyboard.h">
@@ -67,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="include\Figure\Vec.h">
       <Filter>ヘッダー ファイル\Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resource\Resource.h">
+      <Filter>ヘッダー ファイル\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

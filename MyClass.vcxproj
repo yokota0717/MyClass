@@ -123,6 +123,7 @@
     <ClCompile Include="include\Figure\Shape.cpp" />
     <ClCompile Include="include\Figure\Vec.cpp" />
     <ClCompile Include="include\Input\keyboard.cpp" />
+    <ClCompile Include="include\Resource\Resource.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,7 @@
     <ClInclude Include="include\Figure\Shape.h" />
     <ClInclude Include="include\Figure\Vec.h" />
     <ClInclude Include="include\Input\keyboard.h" />
+    <ClInclude Include="include\Resource\Resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
