@@ -1,10 +1,10 @@
 #include "DxLib.h"
+#include "../WorldData.h"
 #include "../Collision/Collision.h"
 #include<string>
 
 using namespace std;
 
-#define PI 3.14159265358979323846264338327950288f
 
 
 //引数：左上の頂点のx、y座標、幅、高さ

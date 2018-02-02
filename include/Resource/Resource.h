@@ -9,6 +9,7 @@ using namespace std;
 class Graph {
 	int handle;
 
+public:
 	Graph(int);
 };
 

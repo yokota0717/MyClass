@@ -2,7 +2,7 @@
 #include "DxLib.h"
 
 
-Graph::Graph(int h):
+Graph::Graph(int h) :
 	handle(h)
 {}
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "DxLib.h"
 
 namespace {
 	//-------------------------------------------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ namespace {
 	}
 
 	//開始時間を引数に、経過時間を取得する
-	static const int GetElapseTime(const int start) {
+	const int GetElapseTime(const int start) {
 		return GetNowCount() - start;
 	}
 }
