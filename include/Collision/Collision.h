@@ -42,3 +42,26 @@ public:
 	bool Collision(Circle) override;
 
 };
+
+class TriangleCollider :public Collider {
+public:
+	Triangle col;
+
+	TriangleCollider(Vec, Vec, Vec);
+	bool Collision(Vec) override;
+	bool Collision(Vec, Vec) override;
+	bool Collision(Box2D) override;
+	bool Collision(Circle) override;
+
+};
+
+class OrvalCollider :public Collider {
+public:
+	Orval col;
+
+	OrvalCollider(float x, float y, float lr, float sr, float ang);
+	bool Collision(Vec) override;
+	bool Collision(Vec, Vec) override;
+	bool Collision(Box2D) override;
+	bool Collision(Circle) override;
+};
