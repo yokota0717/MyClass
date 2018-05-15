@@ -1,7 +1,9 @@
 #include "DxLib.h"
-#include "../include/Input/keyboard.h"
-#include "../Figure/Vec.h"
-#include <string>
+#include "Console\Console.h"
+#include ".\define.h"
+#include "Input\Input.h"
+#include "Object\Object.h"
+#include "Actor\Game.h"
 
 //-------------------------------------------------------------------------------------------------------------------
 //メインループの処理をまとめる
@@ -12,33 +14,32 @@ int ProcessLoop() {
 	return 0;
 }
 //-------------------------------------------------------------------------------------------------------------------
-//ウィンドウサイズ
-const int	SCREEN_WIDTH = 800,
-			SCREEN_HEIGHT = 600;
+//初期化関連をまとめる
+void DXinit() {
+	SetOutApplicationLogValidFlag(FALSE);			//ログ消し
+	SetMainWindowText("Pull-Action!");						//ウインドウタイトルを変更
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16);						//画面解像度、色深度バッファ？変更
+	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);		//画面サイズ変更
+	ChangeWindowMode(TRUE);							//ウィンドウモード変更
+	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);		//初期化
+	DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);	//裏画面設定
+}
 //-------------------------------------------------------------------------------------------------------------------
 
 
-//-------------------------------------------------------------------------------------------------------------------
-//エントリーポイント
-//-------------------------------------------------------------------------------------------------------------------
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-	SetOutApplicationLogValidFlag(FALSE);		//ログ消し
-	SetMainWindowText("Test");					//ウインドウタイトルを変更
-	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);	//画面サイズ変更
-	ChangeWindowMode(TRUE), SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK); //ウィンドウモード変更と初期化と裏画面設定
 
 
-	int white = GetColor(255, 255, 255);
+int Object::uid_ = 0;
 
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	ShowConsole();
+	DXinit();
 
-	while (ProcessLoop() == 0) {	//メインループ
-		Keyboard_Update();
-
-
-
-		if (Keyboard_Get(KEY_INPUT_ESCAPE) == 1) break;  //Escキーが押されたら終了
-
-	}
+	while (ProcessLoop() == 0) {
+		game->doAll();
+		if (game->kb.Down(ESCAPE)) { break; }
+	};
 
 	DxLib_End(); // DXライブラリ終了処理
 	return 0;
