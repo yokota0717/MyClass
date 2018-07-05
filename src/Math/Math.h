@@ -26,7 +26,8 @@ namespace Math {
 		Vec(float x = 0.0f, float y = 0.0f, float z = 0.0f);
 		~Vec();
 
-
+		//ベクトルのゼロクリア
+		void Zero();
 		//ベクトルを正規化
 		Vec Normalize();
 		//ベクトルを度数法で回転する
@@ -79,7 +80,7 @@ namespace Math {
 		Vec& operator -= (const Vec& v);
 		Vec& operator *= (const float n);
 		Vec& operator /= (const float n);
-
+		bool operator == (const Vec& v) const;
 	};
 
 

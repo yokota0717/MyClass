@@ -18,6 +18,11 @@ Math::Vec::Vec(float x, float y, float z)
 	z(z)
 {}
 Math::Vec::~Vec() {};
+void Math::Vec::Zero(){
+	x = 0;
+	y = 0;
+	z = 0;
+}
 //ベクトルを正規化
 Math::Vec Math::Vec::Normalize() {
 	float len = GetVecLen(*this);
@@ -49,7 +54,7 @@ void Math::Vec::RotateVecRadian(Math::Vec center, float rad) {
 }
 //2つのベクトルの外積を返す(3次元)
 Math::Vec Math::Vec::GetCrossVec3(Math::Vec v1, Math::Vec v2) {
-	Math::Vec Result;
+	Math::Vec Result(0.f, 0.f, 0.f);
 	Result.x = v1.y*v2.z - v1.z*v2.y;
 	Result.y = v1.z*v2.x - v1.x*v2.z;
 	Result.z = v1.x*v2.y - v1.y*v2.x;
@@ -70,7 +75,7 @@ Math::Vec Math::Vec::GetUnitVec(Math::Vec v) {
 }
 //ベクトルをn倍する
 Math::Vec Math::Vec::VecScale(Math::Vec v, float n) {
-	Math::Vec Result;
+	Math::Vec Result(0.f, 0.f, 0.f);
 	Result.x *= n;
 	Result.y *= n;
 	Result.z *= n;
@@ -119,7 +124,7 @@ bool Math::Vec::HitBox(Math::Box2D& b) const {
 	return false;
 }
 //オペレータ定義
-Math::Vec& Math::Vec::operator = (const Math::Vec& v) { x = v.x; y = v.y; z = v.z; return *this; }
+Math::Vec& Math::Vec::operator = (const Math::Vec& v) {	x = v.x; y = v.y; z = v.z; return *this; }
 const Math::Vec Math::Vec::operator + (const Math::Vec& v) const { return Vec(x + v.x, y + v.y, z + v.z); }
 const Math::Vec Math::Vec::operator - (const Math::Vec& v) const { return Vec(x - v.x, y - v.y, z - v.z); }
 const Math::Vec Math::Vec::operator * (const float n) const { return Vec(x*n, y*n, z*n); }
@@ -128,6 +133,9 @@ Math::Vec& Math::Vec::operator += (const Math::Vec& v) { x += v.x; y += v.y; z +
 Math::Vec& Math::Vec::operator -= (const Math::Vec& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
 Math::Vec& Math::Vec::operator *= (const float n) { x *= n; y *= n; z *= n; return *this; }
 Math::Vec& Math::Vec::operator /= (const float n) { x /= n; y /= n; z /= n; return *this; }
+bool Math::Vec::operator==(const Vec & v) const {
+	return this->x == v.x && this->y == v.y && this->z == v.z;
+}
 //---------------------------------------------------------------------------------------------------------------------
 
 //Box2D----------------------------------------------------------------------------------------------------------------

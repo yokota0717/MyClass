@@ -1,6 +1,5 @@
 #include "DxLib.h"
 #include "Console\Console.h"
-#include ".\define.h"
 #include "Input\Input.h"
 #include "Object\Object.h"
 #include "Actor\Game.h"
@@ -17,11 +16,10 @@ int ProcessLoop() {
 //初期化関連をまとめる
 void DXinit() {
 	SetOutApplicationLogValidFlag(FALSE);			//ログ消し
-	SetMainWindowText("Pull-Action!");						//ウインドウタイトルを変更
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16);						//画面解像度、色深度バッファ？変更
-	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);		//画面サイズ変更
-	ChangeWindowMode(TRUE);							//ウィンドウモード変更
-	SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);		//初期化
+	SetMainWindowText("Game");						//ウインドウタイトルを変更
+	SetGraphMode(1920, 1080, 16);					//画面解像度、色深度バッファ？変更
+	SetWindowSize(960, 540);						//画面サイズ変更
+	ChangeWindowMode(true);							//ウィンドウモード変更
 	DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);	//裏画面設定
 }
 //-------------------------------------------------------------------------------------------------------------------

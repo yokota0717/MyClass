@@ -2,9 +2,7 @@
 #include "../Input/Input.h"
 #include "../GraphFactory/GraphFactory.h"
 #include "../Object/Object.h"
-#include "../define.h"
-#include "Title.h"
-#include "Field.h"
+
 
 //ルートクラス
 class Root :public Object {
@@ -15,6 +13,7 @@ public:
 	void update() override;
 	void render() override;
 	int frame();
+	int receiveMsg(std::weak_ptr<Object> sender, const std::string& msg);
 
 private:
 	int frame_;
@@ -31,6 +30,7 @@ public:
 
 	Keyboard kb;
 	Mouse mouse;
+	GPad pad;
 	std::shared_ptr<Root> root;
 	std::unique_ptr<GraphFactory> grafac;
 	void doAll();

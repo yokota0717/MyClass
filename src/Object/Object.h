@@ -4,7 +4,7 @@
 //  更新履歴  ：2014.09.30  Ver1.00  植山沙欧  基本的な機能の実装
 //              2015.05.28  Ver1.01  植山沙欧  renderWithChildren()をvirtualにした
 //                                             postMsg receiveMsgにポインタ版を作成した
-//			   2018.4.17 横田麻梨子　座標、画像ハンドル、画像表示範囲を追加
+//			   2018.7.5		横田麻梨子	priorityに合わせた描画を追加
 //--------------------------------------------------------------------------------------------
 #pragma once
 
@@ -15,8 +15,8 @@
 #include <functional>
 #include <assert.h>
 
-#include "DxLib.h"
-#include "../Figure/Math.h"
+//#include "DxLib.h"
+#include "../Math/Math.h"
 
 //-----------------------------------------------------------------------
 //キャスト関連
@@ -596,10 +596,11 @@ public:
 	bool isPause()    const { return (status_ == Status::pause); }
 	Status status() const { return status_; }
 	int  priority() const { return priority_; }
-	void changePriority(int priority) { priority_ = priority; }
-
-	Status getStatus() const { return status_; }
-
+	void changePriority(int priority)
+	{ 
+		priority_ = priority; 
+		getRootObject().lock()->sortByPriority();
+	}
 
 	//-----------------------------------------------------------------------
 	//比較用叙述関数
@@ -612,7 +613,14 @@ public:
 	{
 		return a->priority() < b->priority();
 	}
-
+	//-----------------------------------------------------------------------
+	//renderpriority関連
+	//-----------------------------------------------------------------------
+	//priorityの低い順にソート
+	void sortByPriority() {
+		std::sort(childrenForRender_.begin(), childrenForRender_.end(),
+			[](std::shared_ptr<Object>& lhs, std::shared_ptr<Object>& rhs) {return lhs->priority() < rhs->priority(); });
+	}
 	//-----------------------------------------------------------------------
 	//メッセージ送信
 	//-----------------------------------------------------------------------
@@ -631,7 +639,10 @@ public:
 	{
 		render();
 		//TODO: Z軸及びアルファを考慮した描画順を構築すること
-		renderSelect();
+		//renderSelect();
+		for (auto child : childrenForRender_) {
+			child->renderSelf();
+		}
 	}
 	//overrideして各ステータスのrenderを記述する
 	virtual void render() {};     //通常描画処理
@@ -679,9 +690,10 @@ private:
 	//親子関係構築用
 	std::weak_ptr<Object> selfPtr_;   //自分自身のweak_ptr
 	std::weak_ptr<Object> parentPtr_; //親のweak_ptr
-									  //子供タスク登録できるようにする
-	std::vector<std::shared_ptr<Object>> children_; //子供オブジェクト
-	std::vector<std::shared_ptr<Object>> ins_;      //追加するオブジェクト
+	//子供タスク登録できるようにする
+	std::vector<std::shared_ptr<Object>> children_;				//子供オブジェクト
+	std::vector<std::shared_ptr<Object>> ins_;					//追加するオブジェクト
+	std::vector<std::shared_ptr<Object>> childrenForRender_;	//描画順構築用子供オブジェクト、ルートでのみ使用
 
 	static int uid_;     //ユニークなID、オブジェクトを生成するとインクリメントされる
 	int id_;             //オブジェクトID、このIDでオブジェクトを特定したり検索をかけることができる
@@ -690,11 +702,11 @@ private:
 	int hierarchyLevel_; //どの階層にいるか。ルートは1、子供になるにつれ+1していく
 	int framecount_;     //寝かせるフレーム数、通常駆動時は0
 	Status status_;      //駆動ステータス
-public:
-	int image;			 //画像ハンドル
-	Math::Box2D draw;	 //画像表示範囲
-	Math::Box2D src;	 //読み込む画像の範囲
-	Math::Vec pos;		 //座標
+//public:
+//	int image;			 //画像ハンドル
+//	Math::Box2D draw;	 //画像表示範囲
+//	Math::Box2D src;	 //読み込む画像の範囲
+//	//Math::Vec pos;		 //座標
 
 private:
 	//親子関係構築用：親のweak_ptrを設定する
@@ -719,15 +731,15 @@ private:
 
 	//-----------------------------------------------------------------------
 	//座標、描画範囲のセッター
-	void setPos(Math::Vec p) {
-		pos = p;
-	}
-	void setDraw(Math::Box2D d){
-		draw = d;
-	}
-	void setSrc(Math::Box2D s){
-		src = s;
-	}
+	//void setPos(Math::Vec p) {
+	//	pos = p;
+	//}
+	//void setDraw(Math::Box2D d){
+	//	draw = d;
+	//}
+	//void setSrc(Math::Box2D s){
+	//	src = s;
+	//}
 	//-----------------------------------------------------------------------
 
 
@@ -800,6 +812,7 @@ private:
 		if (!ins_.empty())
 		{
 			children_.insert(children_.end(), ins_.begin(), ins_.end());
+			childrenForRender_.insert(childrenForRender_.end(), ins_.begin(), ins_.end());
 			for (auto& ins : ins_)
 				ins->init();
 		}
@@ -855,6 +868,30 @@ private:
 		for (auto& child : children_)
 		{
 			child->renderSelect();
+		}
+	}
+
+	//-----------------------------------------------------------------------
+	//自身のみで行うrender(描画優先度用)
+	//-----------------------------------------------------------------------
+	void renderSelf() {
+		renderSelectSelf();
+	}
+	void renderSelectSelf() {
+		switch (status())
+		{
+		case Status::run:
+			render();
+			break;
+		case Status::pause:
+			renderPause();
+			break;
+		case Status::sleep:
+			renderSleep();
+			break;
+		case Status::destroy:
+			renderDestroy();
+			break;
 		}
 	}
 };
