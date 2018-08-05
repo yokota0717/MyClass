@@ -11,9 +11,9 @@ class GraphFactory {
 	string path;
 	map<string, int> pool;
 
-	int CreateGraph(const char*);
+	int CreateGraph(const std::string& fileName);
 
 public:
 	GraphFactory();
-	int GetGraph(const char*);
+	int GetGraph(const std::string& fileName);
 };

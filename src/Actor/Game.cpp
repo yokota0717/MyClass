@@ -1,14 +1,18 @@
 #include "Game.h"
+#include "../Scene/Title.h"
+//#include "Player.h"
 
 Root::Root()
 	:
-	Object("Root", Object::Status::run),
+	GameObject("Root", GameObject::Status::run),
 	frame_(0)
 {}
 Root::~Root() {}
 
-void Root::init(std::shared_ptr<Object> thisptr) {
+void Root::init(std::shared_ptr<GameObject> thisptr) {
 	setWeakPtr(thisptr);
+	insertAsChild(new Title("Title"));
+	//insertAsChild(new Player("scene1.jpg"));
 }
 void Root::update() {
 	++frame_;
@@ -19,7 +23,7 @@ void Root::render() {
 int Root::frame() {
 	return frame_;
 }
-int Root::receiveMsg(std::weak_ptr<Object> sender, const std::string & msg)
+int Root::receiveMsg(std::weak_ptr<GameObject> sender, const std::string & msg)
 {
 	return 0;
 }
@@ -27,9 +31,9 @@ Game::Game()
 	:
 	pad(0)
 {
+	grafac = std::make_unique<GraphFactory>();
 	root = std::make_shared<Root>();
 	root->init(root);
-	grafac = std::make_unique<GraphFactory>();
 }
 
 Game::~Game(){}

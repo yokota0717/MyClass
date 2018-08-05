@@ -87,7 +87,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\MyClass\include\DxLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\MyClass\include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -112,29 +117,40 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\MyClass\include\DxLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>D:\MyClass\include\DxLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\Collision\Collision.cpp" />
-    <ClCompile Include="include\Figure\Shape.cpp" />
-    <ClCompile Include="include\Figure\Vec.cpp" />
-    <ClCompile Include="include\Input\Input.cpp" />
-    <ClCompile Include="include\Input\keyboard.cpp" />
-    <ClCompile Include="include\Resource\Resource.cpp" />
+    <ClCompile Include="src\Actor\Game.cpp" />
+    <ClCompile Include="src\Actor\Player.cpp" />
+    <ClCompile Include="src\define.cpp" />
+    <ClCompile Include="src\GraphFactory\GraphFactory.cpp" />
+    <ClCompile Include="src\Image\Image.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Math\Math.cpp" />
+    <ClCompile Include="src\Scene\SceneBase.cpp" />
+    <ClCompile Include="src\Scene\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Collision\Collision.h" />
-    <ClInclude Include="include\Figure\Shape.h" />
-    <ClInclude Include="include\Figure\Vec.h" />
-    <ClInclude Include="include\Input\Input.h" />
-    <ClInclude Include="include\Input\keyboard.h" />
-    <ClInclude Include="include\WorldData.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="src\Actor\Game.h" />
+    <ClInclude Include="src\Actor\Player.h" />
+    <ClInclude Include="src\Console\Console.h" />
+    <ClInclude Include="src\define.h" />
+    <ClInclude Include="src\Easing\Easing.h" />
+    <ClInclude Include="src\GraphFactory\GraphFactory.h" />
+    <ClInclude Include="src\Image\Image.h" />
+    <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Object\Object.h" />
+    <ClInclude Include="src\Scene\SceneBase.h" />
+    <ClInclude Include="src\Scene\Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

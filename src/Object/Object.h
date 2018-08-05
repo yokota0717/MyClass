@@ -4,7 +4,8 @@
 //  更新履歴  ：2014.09.30  Ver1.00  植山沙欧  基本的な機能の実装
 //              2015.05.28  Ver1.01  植山沙欧  renderWithChildren()をvirtualにした
 //                                             postMsg receiveMsgにポインタ版を作成した
-//			   2018.7.5		横田麻梨子	priorityに合わせた描画を追加
+//			   2018.4.17 横田麻梨子　座標、画像ハンドル、画像表示範囲を追加
+//			   2018.8.5	 横田麻梨子	仕様変更により上記変更を削除
 //--------------------------------------------------------------------------------------------
 #pragma once
 
@@ -15,7 +16,7 @@
 #include <functional>
 #include <assert.h>
 
-//#include "DxLib.h"
+#include "DxLib.h"
 #include "../Math/Math.h"
 
 //-----------------------------------------------------------------------
@@ -45,7 +46,7 @@ inline std::shared_ptr<T1> shared_cast(const std::shared_ptr<T2>& ptr)
 //-----------------------------------------------------------------------
 //ベースオブジェクト
 //-----------------------------------------------------------------------
-class Object
+class GameObject
 {
 public:
 	enum class Status
@@ -60,7 +61,7 @@ public:
 
 	//オブジェクト生成
 	//継承時に呼び出し、名前と駆動ステータスを設定すること
-	Object(
+	GameObject(
 		const std::string& name,
 		Status status = Status::run)
 		:
@@ -75,7 +76,7 @@ public:
 	}
 
 	//オブジェクト破棄、特に何もしないがvirtualにしておかないとリークが起きる可能性がある
-	virtual ~Object()
+	virtual ~GameObject()
 	{
 		//      OutputDebugString("~Object\n");
 		//      DeleteStringFromList(id_);
@@ -87,7 +88,7 @@ public:
 	//親にオブジェクトを追加
 	//-----------------------------------------------------------------------
 	template<typename Ptr>
-	std::weak_ptr<Object> insertToParent(Ptr* o)
+	std::weak_ptr<GameObject> insertToParent(Ptr* o)
 	{
 		auto parent = getParentPtr();
 		if (parent.expired())
@@ -97,18 +98,18 @@ public:
 	}
 	//ポーズ状態で親に追加
 	template<typename Ptr>
-	std::weak_ptr<Object> insertToParentPause(Ptr* o)
+	std::weak_ptr<GameObject> insertToParentPause(Ptr* o)
 	{
-		std::weak_ptr<Object> ret = insertToParent(o);
+		std::weak_ptr<GameObject> ret = insertToParent(o);
 		o->pause();
 		return ret;
 	}
 	//スリープ状態で親に追加
 	//寝かせるフレーム数を指定
 	template<typename Ptr>
-	std::weak_ptr<Object> insertToParentSleep(Ptr* o, int framecount)
+	std::weak_ptr<GameObject> insertToParentSleep(Ptr* o, int framecount)
 	{
-		std::weak_ptr<Object> ret = insertToParent(o);
+		std::weak_ptr<GameObject> ret = insertToParent(o);
 		o->sleep(framecount);
 		return ret;
 	}
@@ -117,7 +118,7 @@ public:
 	//子供にオブジェクトを追加
 	//-----------------------------------------------------------------------
 	template<typename Ptr>
-	std::weak_ptr<Object> insertAsChild(Ptr* p)
+	std::weak_ptr<GameObject> insertAsChild(Ptr* p)
 	{
 		std::shared_ptr<Ptr> o(p);
 		p->setWeakPtr(o);
@@ -129,18 +130,18 @@ public:
 	}
 	//ポーズ状態で子供に追加
 	template<typename Ptr>
-	std::weak_ptr<Object> insertAsChildPause(Ptr* o)
+	std::weak_ptr<GameObject> insertAsChildPause(Ptr* o)
 	{
-		std::weak_ptr<Object> ret = insertAsChild(o);
+		std::weak_ptr<GameObject> ret = insertAsChild(o);
 		o->pause();
 		return ret;
 	}
 	//スリープ状態で子供に追加
 	//寝かせるフレーム数を指定
 	template<typename Ptr>
-	std::weak_ptr<Object> insertAsChildSleep(Ptr* o, int framecount)
+	std::weak_ptr<GameObject> insertAsChildSleep(Ptr* o, int framecount)
 	{
-		std::weak_ptr<Object> ret = insertAsChild(o);
+		std::weak_ptr<GameObject> ret = insertAsChild(o);
 		o->sleep(framecount);
 		return ret;
 	}
@@ -149,22 +150,22 @@ public:
 	//ポインタ関連
 	//-----------------------------------------------------------------------
 	//自分のweak_ptrを取得する
-	std::weak_ptr<Object> selfPtr() const
+	std::weak_ptr<GameObject> selfPtr() const
 	{
 		return selfPtr_;
 	}
 	//自分自身のweak_ptrを設定する（ルート以外で使う必要は無い）
-	void setWeakPtr(const std::weak_ptr<Object>& w)
+	void setWeakPtr(const std::weak_ptr<GameObject>& w)
 	{
 		selfPtr_ = w;
 	}
 	//親のweak_ptrを取得する
-	std::weak_ptr<Object>  getParentPtr() const
+	std::weak_ptr<GameObject>  getParentPtr() const
 	{
 		return parentPtr_;
 	}
 	//ルートオブジェクトのweak_ptrを取得する
-	std::weak_ptr<Object> getRootObject() const
+	std::weak_ptr<GameObject> getRootObject() const
 	{
 		auto parent = getParentPtr();
 		if (parent.expired())
@@ -177,9 +178,9 @@ public:
 	//オブジェクト取得関連
 	//-----------------------------------------------------------------------
 	//全子供タスクを取得
-	std::vector<std::weak_ptr<Object>> getChildren() const
+	std::vector<std::weak_ptr<GameObject>> getChildren() const
 	{
-		std::vector<std::weak_ptr<Object>> ret;
+		std::vector<std::weak_ptr<GameObject>> ret;
 		for (auto& child : children_)
 		{
 			ret.push_back(child);
@@ -200,7 +201,7 @@ public:
 	// findNotNames = {"player"}
 	//  =>false
 	bool findObject(
-		std::weak_ptr<Object> object,
+		std::weak_ptr<GameObject> object,
 		const std::vector<std::string>& findNames,
 		const std::vector<std::string>& findNotNames) const
 	{
@@ -220,11 +221,11 @@ public:
 	}
 	//objectの名前にfindNamesがふくまれているか、findNotNamesが含まれていないものをvectorで戻す
 	//例はfindObject()参照
-	std::vector<std::weak_ptr<Object>> getObjectsFromChildren(
+	std::vector<std::weak_ptr<GameObject>> getObjectsFromChildren(
 		const std::vector<std::string>& objectNames1,
 		const std::vector<std::string>& objectNotNames2 = {}) const
 	{
-		std::vector<std::weak_ptr<Object>> ret;
+		std::vector<std::weak_ptr<GameObject>> ret;
 		for (auto& child : children_)
 		{
 			auto r = child->getObjectsFromChildren(objectNames1, objectNotNames2);
@@ -238,12 +239,12 @@ public:
 	}
 	//objectの名前にfindNamesがふくまれているか、findNotNamesが含まれていないものをvectorで戻す
 	//例はfindObject()参照
-	std::vector<std::weak_ptr<Object>> getObjectsFromRoot(
+	std::vector<std::weak_ptr<GameObject>> getObjectsFromRoot(
 		const std::vector<std::string>& objectNames1,
 		const std::vector<std::string>& objectNotNames2 = {}) const
 	{
-		std::vector<std::weak_ptr<Object>> ret;
-		std::shared_ptr<Object> root = getRootObject().lock();
+		std::vector<std::weak_ptr<GameObject>> ret;
+		std::shared_ptr<GameObject> root = getRootObject().lock();
 		for (auto& child : root->children_)
 		{
 			auto r = child->getObjectsFromChildren(objectNames1, objectNotNames2);
@@ -256,7 +257,7 @@ public:
 		return ret;
 	}
 	//指定した名前のobjectを自分の子供から検索し戻す
-	std::weak_ptr<Object> getObjectFromChildren(
+	std::weak_ptr<GameObject> getObjectFromChildren(
 		const std::string& objectName) const
 	{
 		for (auto& child : children_)
@@ -265,26 +266,26 @@ public:
 			auto temp = child->getObjectFromChildren(objectName);
 			if (!temp.expired()) return temp;
 		}
-		return std::weak_ptr<Object>();
+		return std::weak_ptr<GameObject>();
 	}
 	//指定した名前のobjectをルートから検索し戻す
-	std::weak_ptr<Object> getObjectFromRoot(
+	std::weak_ptr<GameObject> getObjectFromRoot(
 		const std::string& objectName) const
 	{
-		std::shared_ptr<Object> root = getRootObject().lock();
+		std::shared_ptr<GameObject> root = getRootObject().lock();
 		for (auto& child : root->children_)
 		{
 			if (child->name() == objectName)      return child;
 			auto temp = child->getObjectFromChildren(objectName);
 			if (!temp.expired()) return temp;
 		}
-		return std::weak_ptr<Object>();
+		return std::weak_ptr<GameObject>();
 	}
 	//オブジェクトのユニークIDからオブジェクトを取得
 	//但し、自分の子供以下から探し、親方向には検索しない
-	std::weak_ptr<Object> getObjectFromChildren(int id) const
+	std::weak_ptr<GameObject> getObjectFromChildren(int id) const
 	{
-		std::weak_ptr<Object> ret;
+		std::weak_ptr<GameObject> ret;
 		if (ID() == id) return selfPtr();
 		for (auto& child : children_)
 		{
@@ -295,7 +296,7 @@ public:
 	}
 	//オブジェクトのユニークIDからオブジェクトを取得
 	//ルートオブジェクトから検索をかける
-	std::weak_ptr<Object> getObjectFromRoot(int id) const
+	std::weak_ptr<GameObject> getObjectFromRoot(int id) const
 	{
 		auto root = getRootObject();
 		return root.lock()->getObjectFromChildren(id);
@@ -341,7 +342,7 @@ public:
 		return id_;
 	}
 	//同じオブジェクトかどうかを調べる
-	bool isSame(std::weak_ptr<Object>& w) const
+	bool isSame(std::weak_ptr<GameObject>& w) const
 	{
 		auto temp = weak_to_shared(w);
 		if (temp == nullptr) return false;
@@ -596,41 +597,33 @@ public:
 	bool isPause()    const { return (status_ == Status::pause); }
 	Status status() const { return status_; }
 	int  priority() const { return priority_; }
-	void changePriority(int priority)
-	{ 
-		priority_ = priority; 
-		getRootObject().lock()->sortByPriority();
-	}
+	void changePriority(int priority) { priority_ = priority; }
+
+	Status getStatus() const { return status_; }
+
 
 	//-----------------------------------------------------------------------
 	//比較用叙述関数
 	//-----------------------------------------------------------------------
-	static bool greaterPriority(const std::shared_ptr<Object>& a, const std::shared_ptr<Object>& b)
+	static bool greaterPriority(const std::shared_ptr<GameObject>& a, const std::shared_ptr<GameObject>& b)
 	{
 		return a->priority() > b->priority();
 	}
-	static bool lessPriority(const std::shared_ptr<Object>& a, const std::shared_ptr<Object>& b)
+	static bool lessPriority(const std::shared_ptr<GameObject>& a, const std::shared_ptr<GameObject>& b)
 	{
 		return a->priority() < b->priority();
 	}
-	//-----------------------------------------------------------------------
-	//renderpriority関連
-	//-----------------------------------------------------------------------
-	//priorityの低い順にソート
-	void sortByPriority() {
-		std::sort(childrenForRender_.begin(), childrenForRender_.end(),
-			[](std::shared_ptr<Object>& lhs, std::shared_ptr<Object>& rhs) {return lhs->priority() < rhs->priority(); });
-	}
+
 	//-----------------------------------------------------------------------
 	//メッセージ送信
 	//-----------------------------------------------------------------------
-	virtual int receiveMsg(std::weak_ptr<Object> sender, const std::string& msg) { return 0; }
-	virtual int postMsg(std::weak_ptr<Object> receiver, const std::string& msg) { return receiver.lock()->receiveMsg(selfPtr(), msg); }
+	virtual int receiveMsg(std::weak_ptr<GameObject> sender, const std::string& msg) { return 0; }
+	virtual int postMsg(std::weak_ptr<GameObject> receiver, const std::string& msg) { return receiver.lock()->receiveMsg(selfPtr(), msg); }
 
-	virtual int receiveMsg(Object* sender, const std::string& msg) { return 0; }
-	virtual int postMsg(Object* receiver, const std::string& msg) { return receiver->receiveMsg(this, msg); }
+	virtual int receiveMsg(GameObject* sender, const std::string& msg) { return 0; }
+	virtual int postMsg(GameObject* receiver, const std::string& msg) { return receiver->receiveMsg(this, msg); }
 
-	virtual int receiveMsg(std::weak_ptr<Object> sender, const Math::Vec arrow) { return 0; }
+	virtual int receiveMsg(std::weak_ptr<GameObject> sender, const Math::Vec arrow) { return 0; }
 	//-----------------------------------------------------------------------
 	//render関連
 	//-----------------------------------------------------------------------
@@ -639,10 +632,7 @@ public:
 	{
 		render();
 		//TODO: Z軸及びアルファを考慮した描画順を構築すること
-		//renderSelect();
-		for (auto child : childrenForRender_) {
-			child->renderSelf();
-		}
+		renderSelect();
 	}
 	//overrideして各ステータスのrenderを記述する
 	virtual void render() {};     //通常描画処理
@@ -669,9 +659,9 @@ public:
 	//あたり判定用（ゲームPG教材用に）
 	//-----------------------------------------------------------------------
 	//やられ判定に攻撃を食らった
-	virtual void defenseHit(std::weak_ptr<Object>&) {}
+	virtual void defenseHit(std::weak_ptr<GameObject>&) {}
 	//攻撃判定により攻撃を与えた
-	virtual void offenseHit(std::weak_ptr<Object>&) {}
+	virtual void offenseHit(std::weak_ptr<GameObject>&) {}
 
 	//-----------------------------------------------------------------------
 	//あたり判定用（ゲームPG教材用に）
@@ -688,12 +678,11 @@ public:
 
 private:
 	//親子関係構築用
-	std::weak_ptr<Object> selfPtr_;   //自分自身のweak_ptr
-	std::weak_ptr<Object> parentPtr_; //親のweak_ptr
-	//子供タスク登録できるようにする
-	std::vector<std::shared_ptr<Object>> children_;				//子供オブジェクト
-	std::vector<std::shared_ptr<Object>> ins_;					//追加するオブジェクト
-	std::vector<std::shared_ptr<Object>> childrenForRender_;	//描画順構築用子供オブジェクト、ルートでのみ使用
+	std::weak_ptr<GameObject> selfPtr_;   //自分自身のweak_ptr
+	std::weak_ptr<GameObject> parentPtr_; //親のweak_ptr
+									  //子供タスク登録できるようにする
+	std::vector<std::shared_ptr<GameObject>> children_; //子供オブジェクト
+	std::vector<std::shared_ptr<GameObject>> ins_;      //追加するオブジェクト
 
 	static int uid_;     //ユニークなID、オブジェクトを生成するとインクリメントされる
 	int id_;             //オブジェクトID、このIDでオブジェクトを特定したり検索をかけることができる
@@ -710,7 +699,7 @@ private:
 
 private:
 	//親子関係構築用：親のweak_ptrを設定する
-	void setParentPtr(const std::weak_ptr<Object>& w)
+	void setParentPtr(const std::weak_ptr<GameObject>& w)
 	{
 		parentPtr_ = w;
 	}
@@ -801,7 +790,7 @@ private:
 		//オブジェクトの消去及び追加
 		children_.erase(
 			std::remove_if(children_.begin(), children_.end(),
-				std::mem_fn(&Object::isDead)),
+				std::mem_fn(&GameObject::isDead)),
 			children_.end()
 		);
 		insert();
@@ -812,7 +801,6 @@ private:
 		if (!ins_.empty())
 		{
 			children_.insert(children_.end(), ins_.begin(), ins_.end());
-			childrenForRender_.insert(childrenForRender_.end(), ins_.begin(), ins_.end());
 			for (auto& ins : ins_)
 				ins->init();
 		}
@@ -868,30 +856,6 @@ private:
 		for (auto& child : children_)
 		{
 			child->renderSelect();
-		}
-	}
-
-	//-----------------------------------------------------------------------
-	//自身のみで行うrender(描画優先度用)
-	//-----------------------------------------------------------------------
-	void renderSelf() {
-		renderSelectSelf();
-	}
-	void renderSelectSelf() {
-		switch (status())
-		{
-		case Status::run:
-			render();
-			break;
-		case Status::pause:
-			renderPause();
-			break;
-		case Status::sleep:
-			renderSleep();
-			break;
-		case Status::destroy:
-			renderDestroy();
-			break;
 		}
 	}
 };

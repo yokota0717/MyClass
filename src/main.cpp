@@ -17,21 +17,30 @@ int ProcessLoop() {
 void DXinit() {
 	SetOutApplicationLogValidFlag(FALSE);			//ログ消し
 	SetMainWindowText("Game");						//ウインドウタイトルを変更
-	SetGraphMode(1920, 1080, 16);					//画面解像度、色深度バッファ？変更
-	SetWindowSize(960, 540);						//画面サイズ変更
-	ChangeWindowMode(true);							//ウィンドウモード変更
-	DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);	//裏画面設定
+	SetGraphMode(960, 540, 16);						//画面解像度、色深度バッファ？変更
+	//SetWindowSize(960, 540);						//画面サイズ変更
+	//ウィンドウモード変更
+	if (MessageBox(NULL, "フルスクリーンで起動しますか？", "起動オプション", MB_YESNO) == IDYES) {
+		ChangeWindowMode(0);
+	}
+	else {
+		ChangeWindowMode(1);
+	}
+	SetDrawScreen(DX_SCREEN_BACK);	//裏画面設定
+	DxLib_Init();
 }
 //-------------------------------------------------------------------------------------------------------------------
 
 
 
 
-int Object::uid_ = 0;
+int GameObject::uid_ = 0;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+#if _DEBUG
 	ShowConsole();
+#endif
 	DXinit();
 
 	while (ProcessLoop() == 0) {
