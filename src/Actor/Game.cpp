@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "../Scene/Title.h"
+#include "../Scene/Stage1.h"
 //#include "Player.h"
 
 Root::Root()
@@ -11,8 +12,8 @@ Root::~Root() {}
 
 void Root::init(std::shared_ptr<GameObject> thisptr) {
 	setWeakPtr(thisptr);
-	insertAsChild(new Title("Title"));
-	//insertAsChild(new Player("scene1.jpg"));
+	insertAsChild(new Title("Title", GameObject::Status::run));
+	insertAsChild(new Stage1("Stage1", GameObject::Status::pause));
 }
 void Root::update() {
 	++frame_;
@@ -52,4 +53,4 @@ bool Game::DebugMode() {
 	return debug_;
 }
 
-extern std::unique_ptr<Game> game(new Game);
+extern Game* game = new Game();

@@ -1,10 +1,11 @@
 #pragma once
 #include "SceneBase.h"
-class Title : public SceneBase
+
+class Stage1 : public SceneBase
 {
 public:
-	Title(const std::string& name, GameObject::Status status);
-	~Title();
+	Stage1(const std::string& name, GameObject::Status status);
+	~Stage1();
 
 	void init() override;
 	void update() override;

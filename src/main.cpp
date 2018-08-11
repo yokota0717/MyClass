@@ -3,6 +3,8 @@
 #include "Input\Input.h"
 #include "Object\Object.h"
 #include "Actor\Game.h"
+//メモリリーク検知用
+#include <crtdbg.h>
 
 //-------------------------------------------------------------------------------------------------------------------
 //メインループの処理をまとめる
@@ -47,7 +49,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		game->doAll();
 		if (game->kb.Down(ESCAPE)) { break; }
 	};
-
+	delete game;
 	DxLib_End(); // DXライブラリ終了処理
+	_CrtDumpMemoryLeaks();	// この時点で開放されていないメモリの情報の表示
 	return 0;
 }

@@ -55,6 +55,12 @@
     <Filter Include="ソース ファイル\Game\Scene">
       <UniqueIdentifier>{1e092da0-cd94-4e1b-bee3-0bdf87c80704}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Game\Scene\Base">
+      <UniqueIdentifier>{c920edb1-bd03-4c90-a5a9-b99136cb951e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Actor\Move">
+      <UniqueIdentifier>{f64704d4-fc07-422d-9479-62522fa449db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Input\Input.cpp">
@@ -81,10 +87,19 @@
     <ClCompile Include="src\Actor\Player.cpp">
       <Filter>ソース ファイル\Game\Actor\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\SceneBase.cpp">
+    <ClCompile Include="src\Scene\Title.cpp">
       <Filter>ソース ファイル\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\Title.cpp">
+    <ClCompile Include="src\Scene\SceneBase.cpp">
+      <Filter>ソース ファイル\Game\Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor\Move\Move.cpp">
+      <Filter>ソース ファイル\Game\Actor\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Stage1.cpp">
+      <Filter>ソース ファイル\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Node.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,10 +134,19 @@
     <ClInclude Include="src\Actor\Player.h">
       <Filter>ソース ファイル\Game\Actor\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\SceneBase.h">
+    <ClInclude Include="src\Scene\Title.h">
       <Filter>ソース ファイル\Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\Title.h">
+    <ClInclude Include="src\Scene\SceneBase.h">
+      <Filter>ソース ファイル\Game\Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\Move\Move.h">
+      <Filter>ソース ファイル\Game\Actor\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Stage1.h">
+      <Filter>ソース ファイル\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Node.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

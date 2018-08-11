@@ -69,4 +69,4 @@ public:
 };
 
 //! ゲーム管理オブジェクト
-extern std::unique_ptr<Game> game;
+extern Game* game;

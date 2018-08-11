@@ -128,6 +128,14 @@ public:
 		ins_.push_back(o);
 		return o;
 	}
+	std::weak_ptr<GameObject> insertAsChild(std::weak_ptr<GameObject> p)
+	{
+		p.lock()->setParentPtr(selfPtr());
+		p.lock()->hierarchyLevel_ = hierarchyLevel_ + 1;
+		//AddStringToList(o->name(), o->ID());
+		ins_.push_back(p.lock());
+		return p;
+	}
 	//ポーズ状態で子供に追加
 	template<typename Ptr>
 	std::weak_ptr<GameObject> insertAsChildPause(Ptr* o)
@@ -599,8 +607,6 @@ public:
 	int  priority() const { return priority_; }
 	void changePriority(int priority) { priority_ = priority; }
 
-	Status getStatus() const { return status_; }
-
 
 	//-----------------------------------------------------------------------
 	//比較用叙述関数
@@ -857,5 +863,27 @@ private:
 		{
 			child->renderSelect();
 		}
+	}
+
+	public:
+	//-----------------------------------------------------------------------
+	//親を変える
+	//-----------------------------------------------------------------------
+	//template<typename Ptr>
+	std::weak_ptr<GameObject> changeParent(std::weak_ptr<GameObject> newParent, std::weak_ptr<GameObject> selfPtr)
+	{
+		//前の親と縁切り
+
+ 		auto oldChildren = getParentPtr().lock()->getChildren();
+		for (auto it = oldChildren.begin(); it != oldChildren.end();) {
+			if ((*it).lock()->ID() == ID()) {
+				it = oldChildren.erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+		//新しい親に登録
+		return newParent.lock()->insertAsChild(selfPtr);
 	}
 };

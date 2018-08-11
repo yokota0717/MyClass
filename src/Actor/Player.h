@@ -1,20 +1,20 @@
 /**
 * @file		Player.h
 * @brief	プレイヤクラス
-* @details	生成時に画像のパスを指定
-			各オブジェクトのrenderでdrawを呼ぶことで描画できる
 */
 
 #pragma once
 #include "../Object/Object.h"
 #include "../Image/Image.h"
+#include "Move\Move.h"
 
 
 class Player : public GameObject
 {
 	Image image_;
+	Move* move_;
 public:
-	Player(const std::string& path);
+	Player(const std::string& path, Move* move);
 	~Player();
 
 	void init() override;
@@ -22,4 +22,3 @@ public:
 	void render() override;
 	void fin();
 };
-

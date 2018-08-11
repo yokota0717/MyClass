@@ -4,10 +4,10 @@
 
 class SceneBase : public GameObject
 {
-	//const std::string name_;
+	GameObject::Status preStatus_;
 public:
-	SceneBase(const std::string& name);
+	SceneBase(const std::string& name, GameObject::Status status);
 	~SceneBase();
 
-	//bool changeScene(SceneBase* scene);
+	bool changeScene(const std::string& scene);
 };

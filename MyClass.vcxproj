@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Actor\Game.cpp" />
+    <ClCompile Include="src\Actor\Move\Move.cpp" />
     <ClCompile Include="src\Actor\Player.cpp" />
     <ClCompile Include="src\define.cpp" />
     <ClCompile Include="src\GraphFactory\GraphFactory.cpp" />
@@ -135,11 +136,14 @@
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Math\Math.cpp" />
+    <ClCompile Include="src\Object\Node.cpp" />
     <ClCompile Include="src\Scene\SceneBase.cpp" />
+    <ClCompile Include="src\Scene\Stage1.cpp" />
     <ClCompile Include="src\Scene\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Actor\Game.h" />
+    <ClInclude Include="src\Actor\Move\Move.h" />
     <ClInclude Include="src\Actor\Player.h" />
     <ClInclude Include="src\Console\Console.h" />
     <ClInclude Include="src\define.h" />
@@ -148,8 +152,10 @@
     <ClInclude Include="src\Image\Image.h" />
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Object\Node.h" />
     <ClInclude Include="src\Object\Object.h" />
     <ClInclude Include="src\Scene\SceneBase.h" />
+    <ClInclude Include="src\Scene\Stage1.h" />
     <ClInclude Include="src\Scene\Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
