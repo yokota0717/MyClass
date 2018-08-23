@@ -20,6 +20,7 @@ using namespace std;
 */
 class Node
 {
+public:
 	/**
 	* @brief  駆動状態
 	*		　状態に応じて呼び出す更新・描画処理を変える
@@ -32,7 +33,6 @@ class Node
 		Destroy,	//削除予約
 		Dead,		//削除済み
 	};
-public:
 	//------------------------------------------------------
 	//生成
 	//------------------------------------------------------
@@ -263,7 +263,7 @@ public:
 	//アクセサ
 	//------------------------------------------------------
 	int ID() const;
-	int priority() const;
+	float priority() const;
 	const string& name() const;
 	State state() const;
 	bool isRunning() const;
@@ -271,7 +271,7 @@ public:
 	bool isSleep() const;
 	bool isDestroy() const;
 	bool isDead() const;
-	void changePriority(int priority);
+	void changePriority(float priority);
 	//-----------------------------------------------------------------------
 	//比較用叙述関数
 	//-----------------------------------------------------------------------
@@ -288,23 +288,38 @@ public:
 	//-----------------------------------------------------------------------
 	virtual int receiveMsg(Node* sender, const string& msg);
 	virtual int postMsg(Node* receiver, const string& msg);
+	//------------------------------------------------------
+	/** @brief 親子関係を構築する	*/
+	//------------------------------------------------------
+	virtual void init();
+	//------------------------------------------------------
+	//ルートからすべてのオブジェクトの更新・描画処理を呼ぶ
+	//------------------------------------------------------
+	/** @brief ルートのみで呼ぶこと */
+	void updateWithChildren();
+	/** @brief ルートのみで呼ぶこと */
+	virtual void renderWithChildren();
+	//------------------------------------------------------
+
+
 
 private:
 	//------------------------------------------------------
 	//メンバ変数
 	//------------------------------------------------------
-	static int		uid_;			//! ユニークID、生成するとインクリメント
-	int				id_;			//! オブジェクトID、検索用
-	int				hierarchy_;		//! 階層、ルートが1、子供になるにつれ+1
-	float			priority_;		//! 描画優先順位、高いほど手前に描画
-	State			state_;			//! 駆動状態
-	string			name_;			//!	名前、検索用
-	int				sleepCnt_;		//! 寝かせるフレーム数、通常時は0
+	static int		uid_;				//! ユニークID、生成するとインクリメント
+	int				id_;				//! オブジェクトID、検索用
+	int				hierarchy_;			//! 階層、ルートが1、子供になるにつれ+1
+	float			priority_;			//! 描画優先順位、高いほど手前に描画
+	State			state_;				//! 駆動状態
+	string			name_;				//!	名前、検索用
+	int				sleepCnt_;			//! 寝かせるフレーム数、通常時は0
 
-	Node*			selfPtr_;		//!	自身のポインタ
-	Node*			parentPtr_;		//!	親のポインタ
-	vector<Node*>	children_;		//!	子供オブジェクト
-	vector<Node*>	insert_;		//! 子供に追加するオブジェクト
+	Node*			selfPtr_;			//!	自身のポインタ
+	Node*			parentPtr_;			//!	親のポインタ
+	vector<Node*>	children_;			//!	子供オブジェクト
+	vector<Node*>	insert_;			//! 子供に追加するオブジェクト
+	vector<Node*>	childrenForRender_;	//! 描画順ソート用子供オブジェクト
 	//------------------------------------------------------
 
 	//------------------------------------------------------
@@ -313,8 +328,6 @@ private:
 	/** @brief 生成時にユニークIDを設定 */
 	void initID();
 	//------------------------------------------------------
-	/** @brief 親子関係を構築する	*/
-	virtual void init();
 	/** @brief 追加するオブジェクトを子供に追加 */
 	void insert();
 
@@ -341,8 +354,6 @@ private:
 	void updateWithChildrenDestroy();
 	/** @brief 自身の駆動状態に応じて呼び出す更新処理を切り替える */
 	virtual void updateSelect();
-	/** @brief ルートのみで呼ぶこと */
-	void updateWithChildren();
 	//-----------------------------------------------------------------------
 	//render関連
 	//-----------------------------------------------------------------------
@@ -366,14 +377,23 @@ private:
 	void renderWithChildrenDestroy();
 	/** @brief 自身の駆動状態に応じて呼び出す描画処理を切り替える */
 	virtual void renderSelect();
-	/** @brief ルートのみで呼ぶこと */
-	virtual void renderWithChildren();
-
+	/** @brief 描画順用子供オブジェクトをpriorityの低い順にソート */
+	void sortByPriority();
+	/** @brief 自身のみで行うrender(描画優先度用) */
+	void renderSelf();
+	/** @brief 自身の駆動状態に応じて呼び出す描画処理を切り替える(自身のみの描画) */
+	void renderSelectSelf();
+	//-----------------------------------------------------------------------
+	//オブジェクト解放
+	//-----------------------------------------------------------------------
+	//! 基底クラスのデストラクタで呼ぶ、個別に呼ぶ必要はない
+	void deleteChildren();
 public:
+
 };
 
 template<typename Ptr>
-inline Node* Node::insertToParent(Ptr * obj){
+inline Node* Node::insertToParent(Ptr* obj){
 	auto parent = getParentPtr();
 	if (!parent) { assert(!"親のポインタがありません"); }
 	parent->insertAsChild(obj);
@@ -381,21 +401,21 @@ inline Node* Node::insertToParent(Ptr * obj){
 }
 
 template<typename Ptr>
-inline Node * Node::insertToParentStop(Ptr * obj) {
+inline Node* Node::insertToParentStop(Ptr * obj) {
 	insertToParent(obj);
 	obj->stop();
 	return obj;
 }
 
 template<typename Ptr>
-inline Node * Node::insertToParentSleep(Ptr * obj, int sleepCnt){
+inline Node* Node::insertToParentSleep(Ptr* obj, int sleepCnt){
 	insertToParent(obj);
 	obj->sleep(sleepCnt);
 	return obj;
 }
 
 template<typename Ptr>
-inline Node * Node::insertAsChild(Ptr * obj) {
+inline Node* Node::insertAsChild(Ptr* obj) {
 	obj->setSelfPtr(obj);
 	obj->setParentPtr(selfPtr());
 	obj->hierarchy_ = hierarchy_ + 1;
@@ -404,14 +424,14 @@ inline Node * Node::insertAsChild(Ptr * obj) {
 }
 
 template<typename Ptr>
-inline Node * Node::insertAsChildStop(Ptr * obj){
+inline Node* Node::insertAsChildStop(Ptr* obj){
 	insertAsChild(obj);
 	obj->stop();
 	return obj;
 }
 
 template<typename Ptr>
-inline Node * Node::insertAsChildSleep(Ptr * obj, int sleepCnt) {
+inline Node* Node::insertAsChildSleep(Ptr* obj, int sleepCnt) {
 	insertAsChild(obj);
 	obj->sleep(sleepCnt);
 	return obj;

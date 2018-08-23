@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#include "../Object/Object.h"
+#include "../Object/Node.h"
 
-class SceneBase : public GameObject
+class SceneBase : public Node
 {
-	GameObject::Status preStatus_;
+	Node::State preState_;
 public:
-	SceneBase(const std::string& name, GameObject::Status status);
+	SceneBase(const std::string& name, Node::State state);
 	~SceneBase();
 
 	bool changeScene(const std::string& scene);

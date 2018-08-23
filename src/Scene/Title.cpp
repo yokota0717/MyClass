@@ -4,9 +4,9 @@
 #include "../Actor/Move/Move.h"
 
 
-Title::Title(const std::string& name, GameObject::Status status)
+Title::Title(const std::string& name, Node::State state)
 	:
-	SceneBase(name, status)
+	SceneBase(name, state)
 {}
 
 
@@ -29,10 +29,10 @@ void Title::render()
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "title");
 }
 
-int Title::receiveMsg(std::weak_ptr<GameObject> sender, const std::string & msg) {
-	if (sender.lock()->name() == "Stage1") {
+int Title::receiveMsg(Node* sender, const std::string & msg) {
+	if (sender->name() == "Stage1") {
 		runAll();
-		sender.lock()->pauseAll();
+		sender->stopAll();
 		//(getObjectFromRoot("Player").lock())->changeParent(sender, selfPtr());
 		return 1;
 	}

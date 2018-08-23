@@ -5,15 +5,17 @@
 
 Root::Root()
 	:
-	GameObject("Root", GameObject::Status::run),
+	Node("Root", Node::State::Run),
 	frame_(0)
 {}
-Root::~Root() {}
+Root::~Root() {
+//	deleteChildren();
+}
 
-void Root::init(std::shared_ptr<GameObject> thisptr) {
-	setWeakPtr(thisptr);
-	insertAsChild(new Title("Title", GameObject::Status::run));
-	insertAsChild(new Stage1("Stage1", GameObject::Status::pause));
+void Root::init(Node* thisptr) {
+	setSelfPtr(thisptr);
+	insertAsChild(new Title("Title", Node::State::Run));
+	//insertAsChild(new Stage1("Stage1", Node::State::Stop));
 }
 void Root::update() {
 	++frame_;
@@ -24,7 +26,7 @@ void Root::render() {
 int Root::frame() {
 	return frame_;
 }
-int Root::receiveMsg(std::weak_ptr<GameObject> sender, const std::string & msg)
+int Root::receiveMsg(Node* sender, const std::string & msg)
 {
 	return 0;
 }
@@ -32,12 +34,15 @@ Game::Game()
 	:
 	pad(0)
 {
-	grafac = std::make_unique<GraphFactory>();
-	root = std::make_shared<Root>();
+	grafac = new GraphFactory();
+	root = new Root();
 	root->init(root);
 }
 
-Game::~Game(){}
+Game::~Game(){
+	delete root;
+	delete grafac;
+}
 
 void Game::doAll() {
 	kb.update();

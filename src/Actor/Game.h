@@ -6,17 +6,17 @@
 #pragma once
 #include "../Input/Input.h"
 #include "../GraphFactory/GraphFactory.h"
-#include "../Object/Object.h"
+#include "../Object/Node.h"
 
 
 /**
 * @brief ルートクラス
 */
-class Root :public GameObject {
+class Root :public Node {
 public:
 	Root();
 	~Root();
-	void init(std::shared_ptr<GameObject> thisptr);
+	void init(Node* thisptr);
 	void update() override;
 	void render() override;
 
@@ -28,7 +28,7 @@ public:
 	/**
 	* @brief シーン切り替え用メッセージ関数
 	*/
-	int receiveMsg(std::weak_ptr<GameObject> sender, const std::string& msg);
+	int receiveMsg(Node* sender, const std::string& msg);
 
 private:
 	//! 経過フレーム数を格納する
@@ -52,9 +52,9 @@ public:
 	Mouse mouse;
 	GPad pad;
 	//! ルートオブジェクト
-	std::shared_ptr<Root> root;
+	Root* root;
 	//! 画像ハンドルを管理するファクトリ
-	std::unique_ptr<GraphFactory> grafac;
+	GraphFactory* grafac;
 
 	/**
 	* @brief ループでこれを呼ぶと全オブジェクトの更新、描画を行う

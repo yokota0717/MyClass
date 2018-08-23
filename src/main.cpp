@@ -1,7 +1,8 @@
 #include "DxLib.h"
 #include "Console\Console.h"
 #include "Input\Input.h"
-#include "Object\Object.h"
+//#include "Object\Object.h"
+#include "Object\Node.h"
 #include "Actor\Game.h"
 //メモリリーク検知用
 #include <crtdbg.h>
@@ -22,12 +23,16 @@ void DXinit() {
 	SetGraphMode(960, 540, 16);						//画面解像度、色深度バッファ？変更
 	//SetWindowSize(960, 540);						//画面サイズ変更
 	//ウィンドウモード変更
+#if _DEBUG
+	ChangeWindowMode(1);
+#else
 	if (MessageBox(NULL, "フルスクリーンで起動しますか？", "起動オプション", MB_YESNO) == IDYES) {
 		ChangeWindowMode(0);
 	}
 	else {
 		ChangeWindowMode(1);
 	}
+#endif
 	SetDrawScreen(DX_SCREEN_BACK);	//裏画面設定
 	DxLib_Init();
 }
@@ -36,7 +41,8 @@ void DXinit() {
 
 
 
-int GameObject::uid_ = 0;
+//int GameObject::uid_ = 0;
+int Node::uid_ = 0;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {

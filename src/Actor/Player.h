@@ -4,12 +4,12 @@
 */
 
 #pragma once
-#include "../Object/Object.h"
+#include "../Object/Node.h"
 #include "../Image/Image.h"
 #include "Move\Move.h"
 
 
-class Player : public GameObject
+class Player : public Node
 {
 	Image image_;
 	Move* move_;

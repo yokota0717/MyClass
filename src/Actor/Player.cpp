@@ -4,7 +4,7 @@
 
 Player::Player(const std::string& path, Move* move)
 	:
-	GameObject("Player", GameObject::Status::run),
+	Node("Player", Node::State::Run),
 	image_(path),
 	move_(move)
 {

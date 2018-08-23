@@ -2,9 +2,9 @@
 
 
 
-SceneBase::SceneBase(const std::string& name, GameObject::Status status)
+SceneBase::SceneBase(const std::string& name, Node::State state)
 	:
-	GameObject(name, status)
+	Node(name, state)
 {}
 
 
@@ -14,7 +14,7 @@ SceneBase::~SceneBase()
 
 bool SceneBase::changeScene(const std::string& scene){
 	//子供を含めて停止
-	pauseAll();
+	stopAll();
 	//次のシーンを起動
 	return postMsg(getObjectFromRoot(scene), "changeScene");
 }

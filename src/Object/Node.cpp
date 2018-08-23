@@ -11,7 +11,9 @@ Node::Node(const string& name, State state)
 	initID();
 }
 
-Node::~Node() {}
+Node::~Node() {
+	deleteChildren();
+}
 
 Node * Node::selfPtr() const {
 	return selfPtr_;
@@ -21,7 +23,7 @@ void Node::setSelfPtr(Node * selfPtr) {
 	selfPtr_ = selfPtr;
 }
 
-Node * Node::getParentPtr() const {
+Node* Node::getParentPtr() const {
 	return parentPtr_;
 }
 
@@ -32,7 +34,7 @@ void Node::setParentPtr(Node * parentPtr) {
 Node * Node::getRootPtr() const {
 	Node* parent = getParentPtr();
 	if (!parent) { return selfPtr_; }
-	else { return getRootPtr(); }
+	else { return parent->getRootPtr(); }
 }
 
 vector<Node*> Node::getChildren() const {
@@ -299,7 +301,7 @@ int Node::ID() const {
 	return id_;
 }
 
-int Node::priority() const {
+float Node::priority() const {
 	return priority_;
 }
 
@@ -331,8 +333,10 @@ bool Node::isDead() const {
 	return (state_ == State::Dead);
 }
 
-void Node::changePriority(int priority) {
+void Node::changePriority(float priority) {
 	priority_ = priority;
+	//! 描画優先度が変更されるときにルートの描画順用子供オブジェクトをソート
+	getRootPtr()->sortByPriority();
 }
 
 int Node::receiveMsg(Node* sender, const string& msg) {
@@ -340,6 +344,7 @@ int Node::receiveMsg(Node* sender, const string& msg) {
 }
 
 int Node::postMsg(Node* receiver, const string& msg) {
+	if (!receiver) { return 0; }
 	return receiver->receiveMsg(selfPtr(), msg);
 }
 
@@ -355,6 +360,10 @@ void Node::insert() {
 	if (!insert_.empty()) {
 		//! 子供に追加
 		children_.insert(children_.end(),
+			insert_.begin(),
+			insert_.end());
+		//! 描画用子供オブジェクト一覧にも追加
+		childrenForRender_.insert(childrenForRender_.end(),
 			insert_.begin(),
 			insert_.end());
 		//! init()もここで呼ぶ
@@ -381,7 +390,8 @@ void Node::updateChildObjects() {
 	//オブジェクトの削除・追加
 	children_.erase(
 		std::remove_if(children_.begin(), children_.end(), std::mem_fn(&Node::isDead)),
-		children_.end());
+		children_.end()
+	);
 	insert();
 }
 
@@ -425,40 +435,88 @@ void Node::updateWithChildren() {
 
 void Node::render() {}
 
-void Node::renderStop() {
-	render();
-}
+void Node::renderStop() {}
 
-void Node::renderSleep() {
-	render();
-}
+void Node::renderSleep() {}
 
 void Node::renderDestroy() {}
 
 void Node::renderChildObjects() {
+	for (auto child : children_) {
+		child->renderSelect();
+	}
+}
+
+void Node::renderWithChildrenRun() {
 	render();
+	renderChildObjects();
 }
 
-void Node::renderWithChildrenRun()
-{
+void Node::renderWithChildrenStop() {
+	renderStop();
+	renderChildObjects();
 }
 
-void Node::renderWithChildrenStop()
-{
+void Node::renderWithChildrenSleep() {
+	renderSleep();
+	renderChildObjects();
 }
 
-void Node::renderWithChildrenSleep()
-{
+void Node::renderWithChildrenDestroy() {
+	renderDestroy();
+	renderChildObjects();
 }
 
-void Node::renderWithChildrenDestroy()
-{
+void Node::renderSelect() {
+	switch (state()) {
+	case State::Run:
+		renderWithChildrenRun();		break;
+	case State::Stop:
+		renderWithChildrenStop();		break;
+	case State::Sleep:
+		renderWithChildrenSleep();		break;
+	case State::Destroy:
+		renderWithChildrenDestroy();	break;
+	}
 }
 
-void Node::renderSelect()
-{
+void Node::renderWithChildren() {
+	render();
+	//! 描画順に対応した
+	for (auto child : childrenForRender_) {
+		child->renderSelf();
+	}
 }
 
-void Node::renderWithChildren()
-{
+void Node::sortByPriority() {
+	std::sort(childrenForRender_.begin(), childrenForRender_.end(),
+		[](Node* lhs, Node* rhs) {return lhs->priority() < rhs->priority(); });
+}
+
+void Node::renderSelf() {
+	renderSelectSelf();
+}
+
+void Node::renderSelectSelf() {
+	switch (state())
+	{
+	case State::Run:
+		render();
+		break;
+	case State::Stop:
+		renderStop();
+		break;
+	case State::Sleep:
+		renderSleep();
+		break;
+	case State::Destroy:
+		renderDestroy();
+		break;
+	}
+}
+
+void Node::deleteChildren() {
+	for (auto child : children_) {
+		delete child;
+	}
 }
