@@ -5,7 +5,12 @@
 #include "Object\Node.h"
 #include "Actor\Game.h"
 //メモリリーク検知用
+#if _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
 #include <crtdbg.h>
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
 
 //-------------------------------------------------------------------------------------------------------------------
 //メインループの処理をまとめる
@@ -39,14 +44,13 @@ void DXinit() {
 //-------------------------------------------------------------------------------------------------------------------
 
 
-
-
 //int GameObject::uid_ = 0;
 int Node::uid_ = 0;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 #if _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	ShowConsole();
 #endif
 	DXinit();
@@ -57,6 +61,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	};
 	delete game;
 	DxLib_End(); // DXライブラリ終了処理
-	_CrtDumpMemoryLeaks();	// この時点で開放されていないメモリの情報の表示
 	return 0;
 }
