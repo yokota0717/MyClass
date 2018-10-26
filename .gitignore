@@ -1,4 +1,4 @@
-DxLib/
+include/DxLib/
 .vs/
 Debug/
 Release/

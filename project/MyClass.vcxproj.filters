@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\System">
+      <UniqueIdentifier>{cba9a998-7daa-4e38-bd49-b9ec63b4a77e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Input">
+      <UniqueIdentifier>{83415416-ccaa-4a47-ac5c-ea70c31509da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Resource">
+      <UniqueIdentifier>{75af9499-c1e5-4723-bcf5-7a6ae9f19627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Resource\Graph">
+      <UniqueIdentifier>{f1834b2b-8043-49a7-8153-02e45fcccf9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Math">
+      <UniqueIdentifier>{2f611725-1798-49fc-aa02-6a6c252f17d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Easing">
+      <UniqueIdentifier>{87aaae9b-d6cc-4448-84df-dd2a1b171af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Console">
+      <UniqueIdentifier>{5eb39ad4-d6db-4d62-a3ec-738ce100178b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game">
+      <UniqueIdentifier>{78762779-e17d-483c-b962-9af01ad8b6e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Game">
+      <UniqueIdentifier>{eb1ab39f-fb7b-491d-8d21-57bf301a8cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\Image">
+      <UniqueIdentifier>{2783109f-0436-48de-b4bc-9306ced02fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Actor">
+      <UniqueIdentifier>{f017954c-dd6a-4d16-b4d2-acb7c402fdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Actor\Player">
+      <UniqueIdentifier>{2aa2fa60-197f-47b8-9e8b-a881e298b486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Scene">
+      <UniqueIdentifier>{1e092da0-cd94-4e1b-bee3-0bdf87c80704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Scene\Base">
+      <UniqueIdentifier>{c920edb1-bd03-4c90-a5a9-b99136cb951e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Actor\Move">
+      <UniqueIdentifier>{f64704d4-fc07-422d-9479-62522fa449db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Node">
+      <UniqueIdentifier>{d9005e5d-6021-4c57-bdd7-acaa2c47335f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>ソース ファイル\System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphFactory\GraphFactory.cpp">
+      <Filter>ソース ファイル\System\Resource\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Math.cpp">
+      <Filter>ソース ファイル\System\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\define.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor\Game.cpp">
+      <Filter>ソース ファイル\Game\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Image\Image.cpp">
+      <Filter>ソース ファイル\System\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor\Player.cpp">
+      <Filter>ソース ファイル\Game\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor\Move\Move.cpp">
+      <Filter>ソース ファイル\Game\Actor\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Node.cpp">
+      <Filter>ソース ファイル\Game\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Title.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Stage1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Input\Input.h">
+      <Filter>ソース ファイル\System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GraphFactory\GraphFactory.h">
+      <Filter>ソース ファイル\System\Resource\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Math.h">
+      <Filter>ソース ファイル\System\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Easing\Easing.h">
+      <Filter>ソース ファイル\System\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Console\Console.h">
+      <Filter>ソース ファイル\System\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="src\define.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\Game.h">
+      <Filter>ソース ファイル\Game\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Image\Image.h">
+      <Filter>ソース ファイル\System\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\Player.h">
+      <Filter>ソース ファイル\Game\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\Move\Move.h">
+      <Filter>ソース ファイル\Game\Actor\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Node.h">
+      <Filter>ソース ファイル\Game\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneManager\SceneManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Stage1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneInfo.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
