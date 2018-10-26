@@ -146,5 +146,8 @@
     <ClInclude Include="src\Object\Node.h">
       <Filter>ソース ファイル\Game\Node</Filter>
     </ClInclude>
+    <ClInclude Include="src\Scene\SceneManager\SceneManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

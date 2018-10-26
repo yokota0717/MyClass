@@ -39,12 +39,12 @@ private:
 /**
 * @brief ゲーム管理クラス
 */
-class Game {
+class GameManager {
 	//! デバッグモード切替用
 	bool debug_;
 public:
-	Game();
-	~Game();
+	GameManager();
+	~GameManager();
 	void fin();
 
 	//!入力関連
@@ -69,4 +69,4 @@ public:
 };
 
 //! ゲーム管理オブジェクト
-extern Game* game;
+extern GameManager* game;

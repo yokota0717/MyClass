@@ -30,7 +30,7 @@ int Root::receiveMsg(Node* sender, const std::string & msg)
 {
 	return 0;
 }
-Game::Game() 
+GameManager::GameManager() 
 	:
 	pad(0)
 {
@@ -39,12 +39,12 @@ Game::Game()
 	root->init(root);
 }
 
-Game::~Game(){
+GameManager::~GameManager(){
 	delete root;
 	delete grafac;
 }
 
-void Game::doAll() {
+void GameManager::doAll() {
 	kb.update();
 	mouse.update();
 	pad.update();
@@ -52,10 +52,10 @@ void Game::doAll() {
 	root->updateWithChildren();
 	root->renderWithChildren();
 }
-void Game::fin() {}
+void GameManager::fin() {}
 
-bool Game::DebugMode() {
+bool GameManager::DebugMode() {
 	return debug_;
 }
 
-extern Game* game = new Game();
+extern GameManager* game = new GameManager();
