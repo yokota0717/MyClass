@@ -4,9 +4,9 @@
 */
 
 #pragma once
-#include "../Object/Node.h"
-#include "../Image/Image.h"
-#include "Move\Move.h"
+#include "../System/Node/Node.h"
+#include "../System/Image/Image.h"
+#include "Move/Move.h"
 
 
 class Player : public Node

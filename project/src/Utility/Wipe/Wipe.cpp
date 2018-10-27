@@ -1,6 +1,6 @@
 #include "DxLib.h"
-#include "./include/Wipe/Wipe.h"
-#include "./include/WorldData.h"
+#include "Wipe.h"
+#include "../../define.h"
 
 void Wipe::Horizonal(int pic1, int pic2) {
 	int i, j;

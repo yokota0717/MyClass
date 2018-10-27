@@ -3,7 +3,7 @@
 * @brief ふるまいクラス、動くオブジェクトに持たせる
 */
 #pragma once
-#include "../../Math/Math.h"
+#include "../../System/Math/Math.h"
 
 class Move
 {

@@ -214,10 +214,6 @@ public:
 	GPad(int id);
 	void update();
 	unsigned int getPadNum();
-	//bool onLeft();
-	//bool onRight();
-	//bool onUp();
-	//bool onDown();
 	bool On(PadCode input);
 	bool Down(PadCode input);
 	bool Up(PadCode input);

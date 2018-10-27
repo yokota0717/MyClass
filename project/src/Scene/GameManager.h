@@ -4,10 +4,11 @@
 */
 
 #pragma once
-#include "../Input/Input.h"
-#include "../GraphFactory/GraphFactory.h"
-#include "../Object/Node.h"
-
+#include "../System/Input/Input.h"
+#include "../System/GraphFactory/GraphFactory.h"
+#include "../System/Node/Node.h"
+#include "../Scene/SceneManager.hpp"
+#include "../System/FPS/FPS.hpp"
 
 /**
 * @brief ルートクラス
@@ -25,11 +26,6 @@ public:
 	*/
 	int frame();
 
-	/**
-	* @brief シーン切り替え用メッセージ関数
-	*/
-	//int receiveMsg(Node* sender, const std::string& msg);
-
 private:
 	//! 経過フレーム数を格納する
 	int frame_;
@@ -42,6 +38,10 @@ private:
 class GameManager {
 	//! デバッグモード切替用
 	bool debug_;
+	//! シーン管理用
+	Scene::SceneManager* sceneManager_;
+	//! FPS固定
+	FPS fps_;
 public:
 	GameManager();
 	~GameManager();

@@ -6,13 +6,13 @@
 */
 
 #pragma once
-#include "SceneInfo.hpp"
+#include "../SceneInfo.hpp"
 
 namespace Scene {
 	class Title : public AbstractScene
 	{
 	public:
-		Title(IOnSceneChangedListener* listener, const Parameter& param);
+		Title(IOnSceneChangedListener* listener, [[maybe_unused]]const Parameter& param);
 		~Title();
 
 		void update() override;

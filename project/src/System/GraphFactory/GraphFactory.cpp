@@ -1,3 +1,10 @@
+/**
+* @file GraphFactory.cpp
+* @brief 画像データのハンドル管理クラスの処理を記述する
+* @author yokota0717
+* @date 2018.10.27
+*/
+
 #include "GraphFactory.h"
 
 GraphFactory::GraphFactory()

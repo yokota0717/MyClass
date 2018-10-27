@@ -130,37 +130,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Actor\Game.cpp" />
+    <ClCompile Include="src\Actor\Behavior\Behavior.cpp" />
     <ClCompile Include="src\Actor\Move\Move.cpp" />
     <ClCompile Include="src\Actor\Player.cpp" />
     <ClCompile Include="src\define.cpp" />
-    <ClCompile Include="src\GraphFactory\GraphFactory.cpp" />
-    <ClCompile Include="src\Image\Image.cpp" />
-    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Math\Math.cpp" />
-    <ClCompile Include="src\Object\Node.cpp" />
-    <ClCompile Include="src\Scene\Stage1.cpp" />
-    <ClCompile Include="src\Scene\Title.cpp" />
+    <ClCompile Include="src\Scene\GameManager.cpp" />
+    <ClCompile Include="src\Scene\Scene\Stage1.cpp" />
+    <ClCompile Include="src\Scene\Scene\Title.cpp" />
+    <ClCompile Include="src\System\Collision\Collision.cpp" />
+    <ClCompile Include="src\System\GraphFactory\GraphFactory.cpp" />
+    <ClCompile Include="src\System\Image\Image.cpp" />
+    <ClCompile Include="src\System\Input\Input.cpp" />
+    <ClCompile Include="src\System\Math\Math.cpp" />
+    <ClCompile Include="src\System\Node\Node.cpp" />
+    <ClCompile Include="src\Utility\Wipe\Wipe.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Actor\Game.h" />
+    <ClInclude Include="src\Actor\Behavior\Behavior.h" />
     <ClInclude Include="src\Actor\Move\Move.h" />
     <ClInclude Include="src\Actor\Player.h" />
-    <ClInclude Include="src\Console\Console.h" />
     <ClInclude Include="src\define.h" />
-    <ClInclude Include="src\Easing\Easing.h" />
-    <ClInclude Include="src\GraphFactory\GraphFactory.h" />
-    <ClInclude Include="src\Image\Image.h" />
-    <ClInclude Include="src\Input\Input.h" />
-    <ClInclude Include="src\Math\Math.h" />
-    <ClInclude Include="src\Object\Node.h" />
+    <ClInclude Include="src\Scene\GameManager.h" />
     <ClInclude Include="src\Scene\SceneInfo.hpp" />
     <ClInclude Include="src\Scene\SceneManager.hpp" />
-    <ClInclude Include="src\Scene\SceneManager\SceneManager.hpp" />
-    <ClInclude Include="src\Scene\Stage1.h" />
-    <ClInclude Include="src\Scene\Title.h" />
+    <ClInclude Include="src\Scene\Scene\Stage1.h" />
+    <ClInclude Include="src\Scene\Scene\Title.h" />
+    <ClInclude Include="src\System\Collision\Collision.h" />
+    <ClInclude Include="src\System\FPS\FPS.hpp" />
+    <ClInclude Include="src\System\GraphFactory\GraphFactory.h" />
+    <ClInclude Include="src\System\Image\Image.h" />
+    <ClInclude Include="src\System\Input\Input.h" />
+    <ClInclude Include="src\System\Math\Math.h" />
+    <ClInclude Include="src\System\Node\Node.h" />
+    <ClInclude Include="src\Utility\Console.hpp" />
+    <ClInclude Include="src\Utility\easing.hpp" />
     <ClInclude Include="src\Utility\Error.hpp" />
+    <ClInclude Include="src\Utility\Utility.hpp" />
+    <ClInclude Include="src\Utility\Wipe\Wipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

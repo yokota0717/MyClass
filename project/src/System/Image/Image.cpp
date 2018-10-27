@@ -1,5 +1,5 @@
 #include "Image.h"
-#include "../Actor/Game.h"
+#include "../../Scene/GameManager.h"
 
 
 Image::Image(const std::string& path)

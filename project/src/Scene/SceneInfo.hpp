@@ -83,20 +83,21 @@ namespace Scene {
 		* @param param 次のシーンに渡すパラメータ
 		* @param stackPopFlag 自身のスタックをクリアするか
 		*/
-		virtual void onSceneChanged(const SceneName scene, const Parameter& param, const StackPopFlag stackPopFlag) = 0;
+		virtual void onSceneChanged(const SceneName& scene, const Parameter* param, const StackPopFlag stackPopFlag) = 0;
 	};
 	/**
 	* @brief シーンの基底クラス
 	*/
 	class AbstractScene {
 	private:
-		IOnSceneChangedListener * sceneLister_;
+		IOnSceneChangedListener* sceneLister_;
 	public:
-		AbstractScene(IOnSceneChangedListener* listener, const Parameter& param)
+		AbstractScene(IOnSceneChangedListener* listener)
 			:
 			sceneLister_(listener)
 		{}
 		virtual ~AbstractScene() = default;
+		IOnSceneChangedListener& callBack() const { return *sceneLister_; }
 		virtual void update() = 0;
 		virtual void render() = 0;
 	};

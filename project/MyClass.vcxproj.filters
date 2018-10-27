@@ -63,23 +63,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Input\Input.cpp">
-      <Filter>ソース ファイル\System\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphFactory\GraphFactory.cpp">
-      <Filter>ソース ファイル\System\Resource\Graph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Math.cpp">
-      <Filter>ソース ファイル\System\Math</Filter>
-    </ClCompile>
     <ClCompile Include="src\define.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Actor\Game.cpp">
-      <Filter>ソース ファイル\Game\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Image\Image.cpp">
-      <Filter>ソース ファイル\System\Image</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>ソース ファイル</Filter>
@@ -90,40 +75,43 @@
     <ClCompile Include="src\Actor\Move\Move.cpp">
       <Filter>ソース ファイル\Game\Actor\Move</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Node.cpp">
-      <Filter>ソース ファイル\Game\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\Title.cpp">
+    <ClCompile Include="src\Scene\GameManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\Stage1.cpp">
+    <ClCompile Include="src\Utility\Wipe\Wipe.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Actor\Behavior\Behavior.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Node\Node.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Collision\Collision.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\GraphFactory\GraphFactory.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Image\Image.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Input\Input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Math\Math.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene\Stage1.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene\Title.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Input\Input.h">
-      <Filter>ソース ファイル\System\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GraphFactory\GraphFactory.h">
-      <Filter>ソース ファイル\System\Resource\Graph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Math.h">
-      <Filter>ソース ファイル\System\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Easing\Easing.h">
-      <Filter>ソース ファイル\System\Easing</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Console\Console.h">
-      <Filter>ソース ファイル\System\Console</Filter>
-    </ClInclude>
     <ClInclude Include="src\define.h">
       <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Actor\Game.h">
-      <Filter>ソース ファイル\Game\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Image\Image.h">
-      <Filter>ソース ファイル\System\Image</Filter>
     </ClInclude>
     <ClInclude Include="src\Actor\Player.h">
       <Filter>ソース ファイル\Game\Actor\Player</Filter>
@@ -131,25 +119,58 @@
     <ClInclude Include="src\Actor\Move\Move.h">
       <Filter>ソース ファイル\Game\Actor\Move</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\Node.h">
-      <Filter>ソース ファイル\Game\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\SceneManager\SceneManager.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\Title.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\Scene\SceneManager.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\Stage1.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Scene\SceneInfo.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Utility\Error.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\Console.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\easing.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\GameManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Node\Node.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\Wipe\Wipe.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\Behavior\Behavior.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Collision\Collision.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GraphFactory\GraphFactory.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Image\Image.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Input\Input.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Math\Math.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene\Stage1.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene\Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\FPS\FPS.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utility\Utility.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

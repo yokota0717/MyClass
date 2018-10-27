@@ -1,9 +1,9 @@
 #pragma once
 #include "DxLib.h"
-#include "Math\Math.h"
+#include "System/Math/Math.h"
 
-const int SCREEN_WIDTH = 1440,
-SCREEN_HEIGHT = 810;
+static const int SCREEN_WIDTH = 960,
+				 SCREEN_HEIGHT = 540;
 
 const int debugRed = GetColor(255, 50, 50);
 const int lineColor = GetColor(200, 200, 200);

@@ -1,6 +1,6 @@
 #pragma once
 #include "DxLib.h"
-#include "./include/WorldData.h"
+#include "../../define.h"
 
 class Wipe {
 public:

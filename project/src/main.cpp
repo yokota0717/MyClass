@@ -1,8 +1,9 @@
 #include "DxLib.h"
-#include "Console\Console.h"
-#include "Input\Input.h"
-#include "Object\Node.h"
-#include "Actor\Game.h"
+#include "Utility/Utility.hpp"
+#include "System/Input/Input.h"
+#include "define.h"
+#include "System/Node/Node.h"
+#include "Scene/GameManager.h"
 //メモリリーク検知用
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
@@ -13,18 +14,18 @@
 
 //-------------------------------------------------------------------------------------------------------------------
 //メインループの処理をまとめる
-int ProcessLoop() {
-	if (ScreenFlip() != 0) return -1;
-	if (ProcessMessage() != 0) return -1;
-	if (ClearDrawScreen() != 0) return -1;
-	return 0;
+bool ProcessLoop() {
+	if (ScreenFlip() != 0) return false;
+	if (ProcessMessage() != 0) return false;
+	if (ClearDrawScreen() != 0) return false;
+	return true;
 }
 //-------------------------------------------------------------------------------------------------------------------
 //初期化関連をまとめる
 void DXinit() {
 	SetOutApplicationLogValidFlag(FALSE);			//ログ消し
 	SetMainWindowText("Game");						//ウインドウタイトルを変更
-	SetGraphMode(960, 540, 16);						//画面解像度、色深度バッファ？変更
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16);						//画面解像度、色深度バッファ？変更
 	//ウィンドウモード変更
 #if _DEBUG
 	ChangeWindowMode(1);
@@ -52,7 +53,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #endif
 	DXinit();
 
-	while (ProcessLoop() == 0) {
+	while (ProcessLoop()) {
 		game->doAll();
 		if (game->kb.Down(ESCAPE)) { break; }
 	};

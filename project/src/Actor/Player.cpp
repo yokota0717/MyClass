@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "Game.h"
+#include "../Scene/GameManager.h"
 
 
 Player::Player(const std::string& path, Move* move)

@@ -1,5 +1,5 @@
 #include "Move.h"
-#include "../Game.h"
+#include "../../Scene/GameManager.h"
 
 
 Move::Move(Math::Vec& pos, float speed)
