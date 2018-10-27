@@ -26,6 +26,7 @@ GameManager::GameManager()
 	debug_ = false;
 	sceneManager_ = new Scene::SceneManager();
 	grafac = new GraphFactory();
+	grafac->initLoad();
 	root = new Root();
 	root->init(root);
 }

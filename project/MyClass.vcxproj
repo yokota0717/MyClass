@@ -130,7 +130,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Actor\Behavior\Behavior.cpp" />
     <ClCompile Include="src\Actor\Move\Move.cpp" />
     <ClCompile Include="src\Actor\Player.cpp" />
     <ClCompile Include="src\define.cpp" />
@@ -147,7 +146,7 @@
     <ClCompile Include="src\Utility\Wipe\Wipe.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Actor\Behavior\Behavior.h" />
+    <ClInclude Include="src\Actor\MoveObjectBase.hpp" />
     <ClInclude Include="src\Actor\Move\Move.h" />
     <ClInclude Include="src\Actor\Player.h" />
     <ClInclude Include="src\define.h" />

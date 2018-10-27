@@ -25,7 +25,7 @@ bool ProcessLoop() {
 void DXinit() {
 	SetOutApplicationLogValidFlag(FALSE);			//ログ消し
 	SetMainWindowText("Game");						//ウインドウタイトルを変更
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16);						//画面解像度、色深度バッファ？変更
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16);	//画面解像度、色深度バッファ？変更
 	//ウィンドウモード変更
 #if _DEBUG
 	ChangeWindowMode(1);

@@ -7,6 +7,7 @@
 
 #pragma once
 #include "../SceneInfo.hpp"
+#include "../../System/Image/Image.h"
 
 namespace Scene {
 	/**

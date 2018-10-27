@@ -1,8 +1,11 @@
 /**
 * @file Node.h
-* @brief 全てのオブジェクトの基底クラスを定義
+* @brief オブジェクトの基底クラスを定義
 * @detail 親子関係構築、自身の駆動状態、メッセージ送受信機能を持つ
-* @date 2018.8.8　開始
+* @date 2018.8.8
+* @par history
+- 2018.10.27
+-# 優先度での描画にバグあり、未解決
 */
 
 #pragma once
@@ -305,16 +308,16 @@ private:
 	//------------------------------------------------------
 	//メンバ変数
 	//------------------------------------------------------
-	static int		uid_;				//! ユニークID、生成するとインクリメント
-	int				id_;				//! オブジェクトID、検索用
-	int				hierarchy_;			//! 階層、ルートが1、子供になるにつれ+1
-	float			priority_;			//! 描画優先順位、高いほど手前に描画
-	State			state_;				//! 駆動状態
-	std::string			name_;				//!	名前、検索用
-	int				sleepCnt_;			//! 寝かせるフレーム数、通常時は0
+	static int			uid_;				//! ユニークID、生成するとインクリメント
+	int					id_;				//! オブジェクトID、検索用
+	int					hierarchy_;			//! 階層、ルートが1、子供になるにつれ+1
+	float				priority_;			//! 描画優先順位、高いほど手前に描画
+	State				state_;				//! 駆動状態
+	std::string				name_;			//!	名前、検索用
+	int					sleepCnt_;			//! 寝かせるフレーム数、通常時は0
 
-	Node*			selfPtr_;				//!	自身のポインタ
-	Node*			parentPtr_;				//!	親のポインタ
+	Node*				selfPtr_;			//!	自身のポインタ
+	Node*				parentPtr_;			//!	親のポインタ
 	std::vector<Node*>	children_;			//!	子供オブジェクト
 	std::vector<Node*>	insert_;			//! 子供に追加するオブジェクト
 	std::vector<Node*>	childrenForRender_;	//! 描画順ソート用子供オブジェクト

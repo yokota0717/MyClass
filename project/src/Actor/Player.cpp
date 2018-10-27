@@ -5,7 +5,6 @@
 Player::Player(const std::string& path, Move* move)
 	:
 	Node("Player", Node::State::Run),
-	image_(path),
 	move_(move)
 {
 }
@@ -22,7 +21,7 @@ void Player::update() {
 }
 
 void Player::render() {
-	image_.draw(Math::Box2D(move_->getPos().x, move_->getPos().y, 100, 100), Math::Box2D(0, 0, 800, 600));
+	image_.draw(Math::Vec(move_->getPos().x, move_->getPos().y), true);
 }
 
 void Player::fin() 

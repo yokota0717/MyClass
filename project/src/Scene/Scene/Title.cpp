@@ -20,5 +20,7 @@ namespace Scene {
 	{
 		SetFontSize(50);
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "title");
+
+
 	}
 }

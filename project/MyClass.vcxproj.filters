@@ -81,9 +81,6 @@
     <ClCompile Include="src\Utility\Wipe\Wipe.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Actor\Behavior\Behavior.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\System\Node\Node.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -143,9 +140,6 @@
     <ClInclude Include="src\Utility\Wipe\Wipe.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Actor\Behavior\Behavior.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\System\Collision\Collision.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -171,6 +165,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Utility\Utility.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Actor\MoveObjectBase.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

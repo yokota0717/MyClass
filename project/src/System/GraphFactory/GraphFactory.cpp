@@ -12,17 +12,47 @@ GraphFactory::GraphFactory()
 	path("./data/image/")
 {}
 
-int GraphFactory::CreateGraph(const std::string& fileName) {
+GraphFactory::~GraphFactory() {
+	for (auto it = divPool_.begin(); it != divPool_.end(); ++it) {
+		delete it->second;
+		it->second = nullptr;
+	}
+	divPool_.clear();
+}
+
+void GraphFactory::initLoad() {
+
+}
+
+int GraphFactory::createGraph(const std::string& fileName) {
 	int handle = LoadGraph(fileName.c_str());
 	return handle;
 }
 
-int GraphFactory::GetGraph(const std::string& fileName) {
+int* GraphFactory::createGraphDiv(const std::string& fileName, const int allNum, const int xNum, const int yNum, const int xSize, const int ySize) {
+	int* handle = new int[allNum];
+	LoadDivGraph(fileName.c_str(), allNum, xNum, yNum, xSize, ySize, handle);
+	return handle;
+}
+
+int GraphFactory::getGraph(const std::string& fileName) {
 	std::string file = path + fileName;
-	auto it = pool.find(file);
-	if (it != pool.end())
+	auto it = singlePool_.find(file);
+	if (it != singlePool_.end()) {
 		return it->second;
-	int newGraph = CreateGraph(file.c_str());
-	pool.insert(std::make_pair(file, newGraph));
+	}
+	int newGraph = createGraph(file.c_str());
+	singlePool_.insert(std::make_pair(file, newGraph));
+	return newGraph;
+}
+
+int* GraphFactory::getGraphDiv(const std::string& fileName, const int allNum, const int xNum, const int yNum, const int xSize, const int ySize) {
+	std::string file = path + fileName;
+	auto it = divPool_.find(file);
+	if (it != divPool_.end()) {
+		return it->second;
+	}
+	int* newGraph = createGraphDiv(file.c_str(), allNum, xNum, yNum, xSize, ySize);
+	divPool_.insert(std::make_pair(file, newGraph));
 	return newGraph;
 }

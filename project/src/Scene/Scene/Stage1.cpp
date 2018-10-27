@@ -6,8 +6,7 @@ namespace Scene {
 	Stage1::Stage1(IOnSceneChangedListener* listener, [[maybe_unused]]const Parameter& param)
 		:
 		AbstractScene(listener)
-	{
-	}
+	{}
 
 
 	Stage1::~Stage1()

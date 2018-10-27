@@ -7,10 +7,10 @@
 
 #pragma once
 #include "../SceneInfo.hpp"
+#include "../../System/Image/Image.h"
 
 namespace Scene {
-	class Title : public AbstractScene
-	{
+	class Title : public AbstractScene {
 	public:
 		Title(IOnSceneChangedListener* listener, [[maybe_unused]]const Parameter& param);
 		~Title();
