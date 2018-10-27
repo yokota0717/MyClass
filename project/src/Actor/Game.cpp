@@ -26,10 +26,11 @@ void Root::render() {
 int Root::frame() {
 	return frame_;
 }
-int Root::receiveMsg(Node* sender, const std::string & msg)
-{
-	return 0;
-}
+//int Root::receiveMsg(Node* sender, const std::string & msg)
+//{
+//	
+//	return 0;
+//}
 GameManager::GameManager() 
 	:
 	pad(0)

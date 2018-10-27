@@ -28,7 +28,7 @@ public:
 	/**
 	* @brief シーン切り替え用メッセージ関数
 	*/
-	int receiveMsg(Node* sender, const std::string& msg);
+	//int receiveMsg(Node* sender, const std::string& msg);
 
 private:
 	//! 経過フレーム数を格納する

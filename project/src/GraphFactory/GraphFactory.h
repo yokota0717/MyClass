@@ -4,12 +4,9 @@
 #include <string>
 #include <memory>
 
-using namespace std;
-
-
 class GraphFactory {
-	string path;
-	map<string, int> pool;
+	std::string path;
+	std::map<std::string, int> pool;
 
 	int CreateGraph(const std::string& fileName);
 

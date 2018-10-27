@@ -1,6 +1,6 @@
 #include "Node.h"
 
-Node::Node(const string& name, State state)
+Node::Node(const std::string& name, State state)
 	:
 	name_(name),
 	state_(state),
@@ -37,8 +37,8 @@ Node * Node::getRootPtr() const {
 	else { return parent->getRootPtr(); }
 }
 
-vector<Node*> Node::getChildren() const {
-	vector<Node*> ret;
+std::vector<Node*> Node::getChildren() const {
+	std::vector<Node*> ret;
 	for (auto child : children_) {
 		//自身の子供を確保
 		ret.push_back(child);
@@ -49,7 +49,7 @@ vector<Node*> Node::getChildren() const {
 	return ret;
 }
 
-bool Node::findObject(Node* object, const vector<string>& findNames, const vector<string>& findNotNames) const {
+bool Node::findObject(Node* object, const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) const {
 	for (auto& name : findNames) {
 		//含むべき名前を含むオブジェクトが見つからなかったらcontinue
 		if (!object->findName(name)) { continue; }
@@ -64,8 +64,8 @@ bool Node::findObject(Node* object, const vector<string>& findNames, const vecto
 	return false;
 }
 
-vector<Node*> Node::getObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames) const {
-	vector<Node*> ret;
+std::vector<Node*> Node::getObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) const {
+	std::vector<Node*> ret;
 	for (auto child : children_) {
 		//孫以降についても検索
 		auto r = child->getObjectsFromChildren(findNames, findNotNames);
@@ -75,16 +75,16 @@ vector<Node*> Node::getObjectsFromChildren(const vector<string>& findNames, cons
 			ret.push_back(child);
 		}
 	}
-	return vector<Node*>();
+	return std::vector<Node*>();
 }
 
-vector<Node*> Node::getObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames) const {
+std::vector<Node*> Node::getObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) const {
 	auto root = getRootPtr();
 	auto ret = root->getObjectsFromChildren(findNames, findNotNames);
 	return ret;
 }
 
-Node* Node::getObjectFromChildren(const string& name) const {
+Node* Node::getObjectFromChildren(const std::string& name) const {
 	for (auto child : children_) {
 		//子供が条件を満たしていれば子供を返す
 		if (child->name() == name) { return child; }
@@ -95,7 +95,7 @@ Node* Node::getObjectFromChildren(const string& name) const {
 	return nullptr;
 }
 
-Node* Node::getObjectFromRoot(const string& name) const {
+Node* Node::getObjectFromRoot(const std::string& name) const {
 	auto root = getRootPtr();
 	return root->getObjectFromChildren(name);
 }
@@ -116,21 +116,21 @@ Node* Node::getObjectFromRoot(int id) const {
 	return root->getObjectFromChildren(id);
 }
 
-bool Node::matchingName(const string & name) const {
+bool Node::matchingName(const std::string & name) const {
 	return (name == name_);
 }
 
-bool Node::findName(const string & name) const {
-	return (name_.find(name) != string::npos);
+bool Node::findName(const std::string & name) const {
+	return (name_.find(name) != std::string::npos);
 }
 
-string Node::changeName(const string& name) {
-	string oldname = name_;
+std::string Node::changeName(const std::string& name) {
+	std::string oldname = name_;
 	name_ = name;
 	return oldname;
 }
 
-void Node::appendName(const string& append) {
+void Node::appendName(const std::string& append) {
 	name_ += append;
 }
 
@@ -150,7 +150,7 @@ void Node::kill() {
 	}
 }
 
-void Node::killFromChildren(const string& name) {
+void Node::killFromChildren(const std::string& name) {
 	for (auto child : children_) {
 		if (child->name() == name) {
 			child->kill();
@@ -158,12 +158,12 @@ void Node::killFromChildren(const string& name) {
 	}
 }
 
-void Node::killFromRoot(const string& name) {
+void Node::killFromRoot(const std::string& name) {
 	auto root = getRootPtr();
 	root->killFromChildren(name);
 }
 
-void Node::killObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::killObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	for (auto child : children_) {
 		if (findObject(child, findNames, findNotNames)) {
 			child->kill();
@@ -171,7 +171,7 @@ void Node::killObjectsFromChildren(const vector<string>& findNames, const vector
 	}
 }
 
-void Node::killObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::killObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	auto root = getRootPtr();
 	root->killObjectsFromChildren(findNames, findNotNames);
 }
@@ -187,7 +187,7 @@ void Node::runAll() {
 	}
 }
 
-void Node::runFromChildren(const string& name) {
+void Node::runFromChildren(const std::string& name) {
 	run();
 	for (auto child : children_) {
 		if (child->name() == name) {
@@ -196,12 +196,12 @@ void Node::runFromChildren(const string& name) {
 	}
 }
 
-void Node::runFromRoot(const string& name) {
+void Node::runFromRoot(const std::string& name) {
 	auto root = getRootPtr();
 	root->runFromChildren(name);
 }
 
-void Node::runObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::runObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	for (auto child : children_) {
 		if (findObject(child, findNames, findNotNames)) {
 			child->run();
@@ -209,7 +209,7 @@ void Node::runObjectsFromChildren(const vector<string>& findNames, const vector<
 	}
 }
 
-void Node::runObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::runObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	auto root = getRootPtr();
 	root->runObjectsFromChildren(findNames, findNotNames);
 }
@@ -225,7 +225,7 @@ void Node::stopAll() {
 	}
 }
 
-void Node::stopFromChildren(const string& name) {
+void Node::stopFromChildren(const std::string& name) {
 	stop();
 	for (auto child : children_) {
 		if (child->name() == name) {
@@ -234,12 +234,12 @@ void Node::stopFromChildren(const string& name) {
 	}
 }
 
-void Node::stopFromRoot(const string& name) {
+void Node::stopFromRoot(const std::string& name) {
 	auto root = getRootPtr();
 	root->stopFromChildren(name);
 }
 
-void Node::stopObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::stopObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	stop();
 	for (auto child : children_) {
 		if (findObject(child, findNames, findNotNames)) {
@@ -248,7 +248,7 @@ void Node::stopObjectsFromChildren(const vector<string>& findNames, const vector
 	}
 }
 
-void Node::stopObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames) {
+void Node::stopObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) {
 	auto root = getRootPtr();
 	root->stopObjectsFromChildren(findNames, findNotNames);
 }
@@ -265,7 +265,7 @@ void Node::sleepAll(int sleepCnt) {
 	}
 }
 
-void Node::sleepFromChildren(const string & name, int sleepCnt) {
+void Node::sleepFromChildren(const std::string & name, int sleepCnt) {
 	sleep(sleepCnt);
 	for (auto child : children_) {
 		if (child->name() == name) {
@@ -274,12 +274,12 @@ void Node::sleepFromChildren(const string & name, int sleepCnt) {
 	}
 }
 
-void Node::sleepFromRoot(const string & name, int sleepCnt) {
+void Node::sleepFromRoot(const std::string & name, int sleepCnt) {
 	auto root = getRootPtr();
 	root->sleepFromChildren(name, sleepCnt);
 }
 
-void Node::sleepObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames, int sleepCnt) {
+void Node::sleepObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames, int sleepCnt) {
 	sleep(sleepCnt);
 	for (auto child : children_) {
 		if (findObject(child, findNames, findNotNames)) {
@@ -288,7 +288,7 @@ void Node::sleepObjectsFromChildren(const vector<string>& findNames, const vecto
 	}
 }
 
-void Node::sleepObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames, int sleepCnt) {
+void Node::sleepObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames, int sleepCnt) {
 	auto root = getRootPtr();
 	root->sleepObjectsFromChildren(findNames, findNotNames, sleepCnt);
 }
@@ -305,7 +305,7 @@ float Node::priority() const {
 	return priority_;
 }
 
-const string& Node::name() const {
+const std::string& Node::name() const {
 	return name_;
 }
 
@@ -339,11 +339,11 @@ void Node::changePriority(float priority) {
 	getRootPtr()->sortByPriority();
 }
 
-int Node::receiveMsg(Node* sender, const string& msg) {
+int Node::receiveMsg(Node* sender, const std::string& msg) {
 	return 0;
 }
 
-int Node::postMsg(Node* receiver, const string& msg) {
+int Node::postMsg(Node* receiver, const std::string& msg) {
 	if (!receiver) { return 0; }
 	return receiver->receiveMsg(selfPtr(), msg);
 }

@@ -2,7 +2,7 @@
 //
 //		ＤＸライブラリ　コンパイルコンフィグヘッダファイル
 //
-//				Ver 3.19b
+//				Ver 3.19d
 //
 // ----------------------------------------------------------------------------
 
@@ -173,13 +173,7 @@
 
 #ifndef __APPLE__
 #ifndef __ANDROID__
-#ifndef __psp2__
-#ifndef __ORBIS__
-#ifndef NN_NINTENDO_SDK
 	#define __WINDOWS__
-#endif // NN_NINTENDO_SDK
-#endif // __ORBIS__
-#endif // __psp2__
 #endif // __ANDROID__
 #endif // __APPLE__
 
@@ -187,11 +181,6 @@
 	#define __USE_ULL__
 #endif
 
-#ifdef NN_NINTENDO_SDK
-	#ifndef __USE_ULL__
-		#define __USE_ULL__
-	#endif
-#endif // NN_NINTENDO_SDK
 
 #ifndef __WINDOWS__
 	#ifndef DX_NON_BEEP
@@ -225,47 +214,8 @@
 #define DX_NON_DIRECT3D9
 #endif
 
-#ifdef __psp2__
-#define DX_NON_2DDRAW
-#define DX_NON_ACM
-#define DX_NON_DSHOW_MP3
-#define DX_NON_DSHOW_MOVIE
-#define DX_NON_MEDIA_FOUNDATION
-#define DX_NON_KEYEX
-#define DX_NON_INPUTSTRING
-#define DX_NON_NETWORK
-#define DX_NON_STOPTASKSWITCH
-#define DX_NON_DIRECT3D11
-#define DX_NON_DIRECT3D9
-#endif // __psp2__
 
-#ifdef __ORBIS__
-#define DX_NON_2DDRAW
-#define DX_NON_ACM
-#define DX_NON_DSHOW_MP3
-#define DX_NON_DSHOW_MOVIE
-#define DX_NON_MEDIA_FOUNDATION
-#define DX_NON_KEYEX
-#define DX_NON_INPUTSTRING
-#define DX_NON_NETWORK
-#define DX_NON_STOPTASKSWITCH
-#define DX_NON_DIRECT3D11
-#define DX_NON_DIRECT3D9
-#endif // __ORBIS__
 
-#ifdef NN_NINTENDO_SDK
-#define DX_NON_2DDRAW
-#define DX_NON_ACM
-#define DX_NON_DSHOW_MP3
-#define DX_NON_DSHOW_MOVIE
-#define DX_NON_MEDIA_FOUNDATION
-#define DX_NON_KEYEX
-#define DX_NON_INPUTSTRING
-#define DX_NON_NETWORK
-#define DX_NON_STOPTASKSWITCH
-#define DX_NON_DIRECT3D11
-#define DX_NON_DIRECT3D9
-#endif // NN_NINTENDO_SDK
 
 #ifdef DX_LIB_LITEVER
 #define DX_NON_ACM
@@ -409,23 +359,13 @@
 #endif
 
 
-#if defined( _WIN64 ) || defined( __APPLE__ )
+#if defined( _WIN64 ) || defined( __APPLE__ ) || defined( __LP64__ )
 	#ifndef __64BIT__
 		#define __64BIT__
 	#endif
 #endif
 
-#ifdef __ORBIS__
-	#ifndef __64BIT__
-		#define __64BIT__
-	#endif
-#endif // __ORBIS__
 
-#ifdef NN_NINTENDO_SDK
-	#ifndef __64BIT__
-		#define __64BIT__
-	#endif
-#endif // NN_NINTENDO_SDK
 
 #if defined( _WIN64 ) || defined( __ANDROID__ ) || defined( __APPLE__ )
 	#ifndef DX_NON_INLINE_ASM
@@ -433,23 +373,8 @@
 	#endif
 #endif
 
-#ifdef __psp2__
-	#ifndef DX_NON_INLINE_ASM
-		#define DX_NON_INLINE_ASM
-	#endif
-#endif // __psp2__
 
-#ifdef __ORBIS__
-	#ifndef DX_NON_INLINE_ASM
-		#define DX_NON_INLINE_ASM
-	#endif
-#endif // __ORBIS__
 
-#ifdef NN_NINTENDO_SDK
-	#ifndef DX_NON_INLINE_ASM
-		#define DX_NON_INLINE_ASM
-	#endif
-#endif // NN_NINTENDO_SDK
 
 #include "DxDataType.h"
 

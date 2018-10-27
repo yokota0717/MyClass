@@ -11,8 +11,6 @@
 #include <algorithm>
 #include <functional>
 #include <assert.h>
-using namespace std;
-
 /**
 * @brief 全てのオブジェクトの基底クラス
 *		 親子関係構築、自身の駆動状態を持つ
@@ -36,7 +34,7 @@ public:
 	//------------------------------------------------------
 	//生成
 	//------------------------------------------------------
-	Node(const string& name, State state);
+	Node(const std::string& name, State state);
 	virtual ~Node();
 	//------------------------------------------------------
 	//親にオブジェクトを追加
@@ -105,7 +103,7 @@ public:
 	//オブジェクト取得関連
 	//------------------------------------------------------
 	/** @brief 全子供オブジェクトを取得 */
-	vector<Node*> getChildren() const;
+	std::vector<Node*> getChildren() const;
 	/**
 	* @brief objectの名前にfindNamesが含まれているか、findNotNamesが含まれていない場合にtrueを返す
 	* @param Node* object 調べる対象のオブジェクトのポインタ
@@ -113,33 +111,33 @@ public:
 	* @param vector<string> findNotNames 含まれない名前のvector
 	* @return bool objectの名前にfindNamesが含まれているか、findNotNamesが含まれていない場合にtrue
 	*/
-	bool findObject(Node* object, const vector<string>& findNames, const vector<string>& findNotNames) const;
+	bool findObject(Node* object, const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames) const;
 	/**
 	* @brief 子供オブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトのポインタを取得する
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	* @return vector<Node*> 名前にfindNamesが含まれているか、findNotNamesが含まれていないオブジェクトのポインタのvector
 	*/
-	vector<Node*> getObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames = {}) const;
+	std::vector<Node*> getObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {}) const;
 	/**
 	* @brief ルートオブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトのポインタを取得する
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	* @return vector<Node*> 名前にfindNamesが含まれているか、findNotNamesが含まれていないオブジェクトのポインタのvector
 	*/
-	vector<Node*> getObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames = {}) const;
+	std::vector<Node*> getObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {}) const;
 	/**
 	* @brief 子供オブジェクトから指定した名前のオブジェクトを取得する
 	* @param string name 見つけるオブジェクトの名前
 	* @return Node* オブジェクトのポインタ
 	*/
-	Node* getObjectFromChildren(const string& name) const;
+	Node* getObjectFromChildren(const std::string& name) const;
 	/**
 	* @brief ルートオブジェクトから指定した名前のオブジェクトを取得する
 	* @param string name 見つけるオブジェクトの名前
 	* @return Node* オブジェクトのポインタ
 	*/
-	Node* getObjectFromRoot(const string& name) const;
+	Node* getObjectFromRoot(const std::string& name) const;
 	/**
 	* @brief 子供オブジェクトから指定したIDのオブジェクトを取得する
 	* @param int id 見つけるオブジェクトのID
@@ -156,17 +154,17 @@ public:
 	//オブジェクト名前関連
 	//------------------------------------------------------
 	/** @brief 引数の名前と自身の名前が一致していればtrueを返す */
-	bool matchingName(const string& name) const;
+	bool matchingName(const std::string& name) const;
 	/** @brief 指定の文字列が自身の名前に含まれていればtrueを返す */
-	bool findName(const string& name) const;
+	bool findName(const std::string& name) const;
 	/** 
 	* @brief 名前を変更する 
 	* @param string name 変更後の名前
 	* @return string 変更前の名前
 	*/
-	string changeName(const string& name);
+	std::string changeName(const std::string& name);
 	/** @brief 名前の\0以降に指定の文字列を追加 */
-	void appendName(const string& append);
+	void appendName(const std::string& append);
 	//------------------------------------------------------
 	//オブジェクトID関連
 	//------------------------------------------------------
@@ -180,83 +178,83 @@ public:
 	//オブジェクト破棄予約------------------------------------
 	virtual void kill();
 	/** @brief 指定した名前のオブジェクトを子供から探して破棄予約 */
-	void killFromChildren(const string& name);
+	void killFromChildren(const std::string& name);
 	/** @brief 指定した名前のオブジェクトをルートから探して破棄予約 */
-	void killFromRoot(const string& name);
+	void killFromRoot(const std::string& name);
 	/**
 	* @brief 子供オブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトの破棄予約をする
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void killObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void killObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	/**
 	* @brief ルートオブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトの破棄予約をする
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void killObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void killObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	//オブジェクト駆動---------------------------------------
 	virtual void run();
 	/** @brief 子供を含めた駆動 */
 	virtual void runAll();
 	/** @brief 指定した名前のオブジェクトを子供から探して駆動 */
-	void runFromChildren(const string& name);
+	void runFromChildren(const std::string& name);
 	/** @brief 指定した名前のオブジェクトをルートから探して駆動 */
-	void runFromRoot(const string& name);
+	void runFromRoot(const std::string& name);
 	/**
 	* @brief 子供オブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトを駆動
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void runObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void runObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	/**
 	* @brief ルートオブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトを駆動
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void runObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void runObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	//オブジェクト停止----------------------------------------
 	virtual void stop();
 	/** @brief 子供を含めた停止 */
 	void stopAll();
 	/** @brief 指定した名前のオブジェクトを子供から探して停止 */
-	void stopFromChildren(const string& name);
+	void stopFromChildren(const std::string& name);
 	/** @brief 指定した名前のオブジェクトをルートから探して停止 */
-	void stopFromRoot(const string& name);
+	void stopFromRoot(const std::string& name);
 	/**
 	* @brief 子供オブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトを停止
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void stopObjectsFromChildren(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void stopObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	/**
 	* @brief ルートオブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトを停止
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	*/
-	void stopObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames = {});
+	void stopObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames = {});
 	//オブジェクトを寝かせる----------------------------------
 	virtual void sleep(int sleepCnt);
 	/** @brief 子供を含めたスリープ */
 	void sleepAll(int sleepCnt);
 	/** @brief 指定した名前のオブジェクトを子供から探してスリープ */
-	void sleepFromChildren(const string& name, int sleepCnt);
+	void sleepFromChildren(const std::string& name, int sleepCnt);
 	/** @brief 指定した名前のオブジェクトをルートから探してスリープ */
-	void sleepFromRoot(const string& name, int sleepCnt);
+	void sleepFromRoot(const std::string& name, int sleepCnt);
 	/**
 	* @brief 子供オブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトをスリープ
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	* @param int sleepCnt 寝かせるフレーム数
 	*/
-	void sleepObjectsFromChildren(const vector<string>& findNames, const  vector<string>& findNotNames, int sleepCnt);
+	void sleepObjectsFromChildren(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames, int sleepCnt);
 	/**
 	* @brief ルートオブジェクトから、findNamesが含まれているか、findNotNamesが含まれていないオブジェクトをスリープ
 	* @param vector<string> findNames 含まれる名前のvector
 	* @param vector<string> findNotNames 含まれない名前のvector
 	* @param int sleepCnt 寝かせるフレーム数
 	*/
-	void sleepObjectsFromRoot(const vector<string>& findNames, const vector<string>& findNotNames, int sleepCnt);
+	void sleepObjectsFromRoot(const std::vector<std::string>& findNames, const std::vector<std::string>& findNotNames, int sleepCnt);
 	/** @brief スリープからの復帰保証用 */
 	virtual void resume();
 	//------------------------------------------------------
@@ -264,7 +262,7 @@ public:
 	//------------------------------------------------------
 	int ID() const;
 	float priority() const;
-	const string& name() const;
+	const std::string& name() const;
 	State state() const;
 	bool isRunning() const;
 	bool isStop() const;
@@ -286,8 +284,8 @@ public:
 	//-----------------------------------------------------------------------
 	//メッセージ送受信
 	//-----------------------------------------------------------------------
-	virtual int receiveMsg(Node* sender, const string& msg);
-	virtual int postMsg(Node* receiver, const string& msg);
+	virtual int receiveMsg(Node* sender, const std::string& msg);
+	virtual int postMsg(Node* receiver, const std::string& msg);
 	//------------------------------------------------------
 	/** @brief 親子関係を構築する	*/
 	//------------------------------------------------------
@@ -312,14 +310,14 @@ private:
 	int				hierarchy_;			//! 階層、ルートが1、子供になるにつれ+1
 	float			priority_;			//! 描画優先順位、高いほど手前に描画
 	State			state_;				//! 駆動状態
-	string			name_;				//!	名前、検索用
+	std::string			name_;				//!	名前、検索用
 	int				sleepCnt_;			//! 寝かせるフレーム数、通常時は0
 
-	Node*			selfPtr_;			//!	自身のポインタ
-	Node*			parentPtr_;			//!	親のポインタ
-	vector<Node*>	children_;			//!	子供オブジェクト
-	vector<Node*>	insert_;			//! 子供に追加するオブジェクト
-	vector<Node*>	childrenForRender_;	//! 描画順ソート用子供オブジェクト
+	Node*			selfPtr_;				//!	自身のポインタ
+	Node*			parentPtr_;				//!	親のポインタ
+	std::vector<Node*>	children_;			//!	子供オブジェクト
+	std::vector<Node*>	insert_;			//! 子供に追加するオブジェクト
+	std::vector<Node*>	childrenForRender_;	//! 描画順ソート用子供オブジェクト
 	//------------------------------------------------------
 
 	//------------------------------------------------------
