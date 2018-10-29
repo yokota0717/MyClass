@@ -155,6 +155,7 @@
     <ClInclude Include="src\Scene\SceneManager.hpp" />
     <ClInclude Include="src\Scene\Scene\Stage1.h" />
     <ClInclude Include="src\Scene\Scene\Title.h" />
+    <ClInclude Include="src\System\Animator\Animator.hpp" />
     <ClInclude Include="src\System\Collision\Collision.h" />
     <ClInclude Include="src\System\FPS\FPS.hpp" />
     <ClInclude Include="src\System\GraphFactory\GraphFactory.h" />
@@ -162,9 +163,10 @@
     <ClInclude Include="src\System\Input\Input.h" />
     <ClInclude Include="src\System\Math\Math.h" />
     <ClInclude Include="src\System\Node\Node.h" />
-    <ClInclude Include="src\Utility\Console.hpp" />
-    <ClInclude Include="src\Utility\easing.hpp" />
+    <ClInclude Include="src\Utility\Counter.hpp" />
+    <ClInclude Include="src\Utility\Easing.hpp" />
     <ClInclude Include="src\Utility\Error.hpp" />
+    <ClInclude Include="src\Utility\Random.hpp" />
     <ClInclude Include="src\Utility\Utility.hpp" />
     <ClInclude Include="src\Utility\Wipe\Wipe.h" />
   </ItemGroup>

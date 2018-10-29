@@ -1,11 +1,4 @@
 /**
-* @file		Image.h
-* @brief	描画に関する処理をするクラス
-* @details	生成時に画像のパスを指定
-			各オブジェクトのrenderでdrawを呼ぶことで描画できる
-*/
-
-/**
 * @file Image.h
 * @brief 画像描画に関するクラスを定義する
 * @author yokota0717
@@ -64,4 +57,3 @@ public:
 	*/
 	void draw(const Math::Vec& draw, const int index, const bool isCenter);
 };
-

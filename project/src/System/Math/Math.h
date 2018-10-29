@@ -1,16 +1,24 @@
+/**
+* @file Math.h
+* @brief 数学関連の構造体を定義する
+* @author yokota0717
+* @date 2018.10.29
+*/
+
+
 #pragma once
 #include <cmath>
 
 
 namespace Math {
-	class Vec;
+	struct Vec;
 	struct Box2D;
 	struct Circle;
 	struct Triangle;
 	struct Orval;
 
 	//円周率
-	static float PI = 3.141592653589793238462643383279502884197f;
+	static constexpr float PI = 3.141592653589793238462643383279502884197f;
 	//角度変換
 	float ToDegree(float radian);
 	float ToRadian(float degree);
@@ -18,9 +26,8 @@ namespace Math {
 	float Gravity(int onemeter);
 
 
-	//ベクトルクラス
-	class Vec {
-	public:
+	//ベクトル構造体
+	struct Vec {
 		float x, y, z;		//座標
 
 		Vec(float x = 0.0f, float y = 0.0f, float z = 0.0f);

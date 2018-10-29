@@ -1,5 +1,5 @@
 /**
-* @file Game.h
+* @file GameManager.h
 * @brief ゲームクラス、ルートクラスを定義する
 */
 
