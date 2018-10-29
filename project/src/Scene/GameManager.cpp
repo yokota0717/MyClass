@@ -25,8 +25,6 @@ GameManager::GameManager()
 {
 	debug_ = false;
 	sceneManager_ = new Scene::SceneManager();
-	resManager_ = new ResourceManager();
-	resManager_->init();
 	root = new Root();
 	root->init(root);
 }
@@ -34,7 +32,6 @@ GameManager::GameManager()
 GameManager::~GameManager(){
 	delete root;
 	delete sceneManager_;
-	delete resManager_;
 }
 
 void GameManager::doAll() {

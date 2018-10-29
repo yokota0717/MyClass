@@ -106,23 +106,21 @@ int ResourceManager::SoundFactory::getSound(std::string & fileName)
 
 ResourceManager::ResourceManager() {}
 
-ResourceManager::~ResourceManager()
-{
-}
+ResourceManager::~ResourceManager() {}
 
 void ResourceManager::init() {
-	static GraphFactory* graphfac_ = new GraphFactory();
-	static SoundFactory* soundfac_ = new SoundFactory();
+	static std::unique_ptr<GraphFactory> graphfac_ = std::make_unique<GraphFactory>();
+	static std::unique_ptr<SoundFactory> soundfac_ = std::make_unique<SoundFactory>();
 	graphfac_->initLoad();
 	soundfac_->initLoad();
 }
 
 ResourceManager::GraphFactory& ResourceManager::getGraphFac() {
-	static GraphFactory* graphfac_ = new GraphFactory();
+	static std::unique_ptr<GraphFactory> graphfac_ = std::make_unique<GraphFactory>();
 	return *graphfac_;
 }
 
 ResourceManager::SoundFactory& ResourceManager::getSoundFac() {
-	static SoundFactory* soundfac_ = new SoundFactory();
+	static std::unique_ptr<SoundFactory> soundfac_ = std::make_unique<SoundFactory>();
 	return *soundfac_;
 }

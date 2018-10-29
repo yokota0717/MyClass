@@ -53,8 +53,6 @@ public:
 	GPad pad;
 	//! ルートオブジェクト
 	Root* root;
-	//! 画像ハンドルを管理するファクトリ
-	ResourceManager* resManager_;
 
 	/**
 	* @brief ループでこれを呼ぶと全オブジェクトの更新、描画を行う
