@@ -25,8 +25,8 @@ GameManager::GameManager()
 {
 	debug_ = false;
 	sceneManager_ = new Scene::SceneManager();
-	grafac = new GraphFactory();
-	grafac->initLoad();
+	resManager_ = new ResourceManager();
+	resManager_->init();
 	root = new Root();
 	root->init(root);
 }
@@ -34,7 +34,7 @@ GameManager::GameManager()
 GameManager::~GameManager(){
 	delete root;
 	delete sceneManager_;
-	delete grafac;
+	delete resManager_;
 }
 
 void GameManager::doAll() {

@@ -143,6 +143,7 @@
     <ClCompile Include="src\System\Input\Input.cpp" />
     <ClCompile Include="src\System\Math\Math.cpp" />
     <ClCompile Include="src\System\Node\Node.cpp" />
+    <ClCompile Include="src\System\ResourceManager\ResourceManager.cpp" />
     <ClCompile Include="src\Utility\Wipe\Wipe.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="src\System\Input\Input.h" />
     <ClInclude Include="src\System\Math\Math.h" />
     <ClInclude Include="src\System\Node\Node.h" />
+    <ClInclude Include="src\System\ResourceManager\ResourceManager.h" />
     <ClInclude Include="src\Utility\Counter.hpp" />
     <ClInclude Include="src\Utility\Easing.hpp" />
     <ClInclude Include="src\Utility\Error.hpp" />

@@ -5,7 +5,7 @@
 
 #pragma once
 #include "../System/Input/Input.h"
-#include "../System/GraphFactory/GraphFactory.h"
+#include "../System/ResourceManager/ResourceManager.h"
 #include "../System/Node/Node.h"
 #include "../Scene/SceneManager.hpp"
 #include "../System/FPS/FPS.hpp"
@@ -54,7 +54,7 @@ public:
 	//! ルートオブジェクト
 	Root* root;
 	//! 画像ハンドルを管理するファクトリ
-	GraphFactory* grafac;
+	ResourceManager* resManager_;
 
 	/**
 	* @brief ループでこれを呼ぶと全オブジェクトの更新、描画を行う

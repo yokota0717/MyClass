@@ -10,10 +10,10 @@ Image::~Image()
 {}
 
 void Image::setHandle(const std::string& path) {
-	handle_ = game->grafac->getGraph(path);
+	handle_ = game->resManager_->getGraphFac().getGraph(path);
 }
 void Image::setHandleDiv(const std::string& path, const int allNum, const int xNun, const int yNun, const int xSize, const int ySize) {
-	handleDiv_ = game->grafac->getGraphDiv(path, allNum, xNun, yNun, xSize, ySize);
+	handleDiv_ = game->resManager_->getGraphFac().getGraphDiv(path, allNum, xNun, yNun, xSize, ySize);
 }
 
 void Image::draw(const Math::Vec& draw, const bool isCenter) {
