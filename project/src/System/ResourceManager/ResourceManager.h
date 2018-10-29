@@ -105,6 +105,7 @@ private:
 		* @param fileName サウンドデータの名前
 		* @return 正常に読み込めたら1が返る
 		* - すでに存在するデータを指定したらそのハンドルが返る
+		* @warning 動作未確認
 		*/
 		int loadSoundAsync(std::string& fileName);
 
@@ -122,7 +123,7 @@ private:
 		* @param fileName 欲しいサウンドの名前
 		* @return サウンドのハンドル
 		*/
-		int getSound(std::string& fileName);
+		int getSound(const std::string& fileName);
 	};
 
 

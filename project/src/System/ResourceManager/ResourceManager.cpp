@@ -57,7 +57,9 @@ int ResourceManager::GraphFactory::getGraph(const std::string& fileName) {
 		return it->second;
 	}
 	int newGraph = createGraph(file.c_str());
-	singlePool_.insert(std::make_pair(file, newGraph));
+	if (newGraph != -1) {
+		singlePool_.insert(std::make_pair(file, newGraph));
+	}
 	return newGraph;
 }
 
@@ -68,7 +70,9 @@ int* ResourceManager::GraphFactory::getGraphDiv(const std::string& fileName, con
 		return it->second;
 	}
 	int* newGraph = createGraphDiv(file.c_str(), allNum, xNum, yNum, xSize, ySize);
-	divPool_.insert(std::make_pair(file, newGraph));
+	if (*newGraph != -1) {
+		divPool_.insert(std::make_pair(file, newGraph));
+	}
 	return newGraph;
 }
 
@@ -76,7 +80,7 @@ int* ResourceManager::GraphFactory::getGraphDiv(const std::string& fileName, con
 
 ResourceManager::SoundFactory::SoundFactory()
 	:
-	path("./data/image/")
+	path("./data/sound/")
 {}	
 
 ResourceManager::SoundFactory::~SoundFactory()
@@ -84,22 +88,29 @@ ResourceManager::SoundFactory::~SoundFactory()
 	InitSoundMem();
 }
 
-int ResourceManager::SoundFactory::loadSound(std::string & fileName) {
+int ResourceManager::SoundFactory::loadSound(std::string& fileName) {
+	int handle = LoadSoundMem(fileName.c_str());
+	return handle;
+}
+
+int ResourceManager::SoundFactory::loadSoundAsync(std::string& fileName) {
+	SetUseASyncLoadFlag(true);	//非同期読み込みフラグをtrueに
+	int handle = LoadSoundMem(fileName.c_str());
+	SetUseASyncLoadFlag(false);
+	return 1;
+}
+
+int ResourceManager::SoundFactory::getSound(const std::string& fileName) {
 	std::string file = path + fileName;
-
-
-
-	return 0;
-}
-
-int ResourceManager::SoundFactory::loadSoundAsync(std::string & fileName)
-{
-	return 0;
-}
-
-int ResourceManager::SoundFactory::getSound(std::string & fileName)
-{
-	return 0;
+	auto it = pool_.find(file);
+	if(it != pool_.end()){
+		return it->second;
+	}
+	int newSound = loadSound(file);
+	if (newSound != -1) {	//読み込みに失敗していなかったらコンテナに追加
+		pool_.insert(std::make_pair(file, newSound));
+	}
+	return newSound;
 }
 
 //---------------------------------------------------------------------------------------------
