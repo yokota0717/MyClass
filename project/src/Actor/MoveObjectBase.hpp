@@ -16,7 +16,7 @@
 */
 class MoveObjectBase : public Node {
 private:
-	Move* move_;
+	MoveBase* move_;
 
 
 };

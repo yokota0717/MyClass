@@ -2,7 +2,7 @@
 #include "../Scene/GameManager.h"
 
 
-Player::Player(const std::string& path, Move* move)
+Player::Player(const std::string& path, MoveBase* move)
 	:
 	Node("Player", Node::State::Run),
 	move_(move)

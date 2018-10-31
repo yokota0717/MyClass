@@ -1,27 +1,36 @@
 /**
 * @file Move.h
 * @brief ふるまいクラス、動くオブジェクトに持たせる
+* @author yokota0717
+* @param history
+- 2018.10.31 yokota0717
+-# 仮引数をconstにした
+-# 重力の追加
 */
 #pragma once
 #include "../../System/Math/Math.h"
 
-class Move
+class MoveBase
 {
 protected:
 	//! 現在座標
 	Math::Vec pos_;
 	//! 移動速度
 	float speed_;
+	//! 重力を適用するか
+	bool isGravity_;
+	//! 重力加速度
+	const float gravity_;
 public:
-	Move(Math::Vec& pos, float speed);
-	virtual ~Move();
+	explicit MoveBase(const Math::Vec& pos, const float speed, const bool gravity);
+	virtual ~MoveBase();
 	virtual void move() = 0;
 
 	Math::Vec& getPos();
 };
 
-class InputMove : public Move {
+class PlayerMove : public MoveBase {
 public:
-	InputMove(Math::Vec& pos, float speed);
-	void move() override;
+	PlayerMove(const Math::Vec& pos, const float speed, const bool gravity);
+	virtual void move();
 };

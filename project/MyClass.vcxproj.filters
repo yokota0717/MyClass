@@ -87,9 +87,6 @@
     <ClCompile Include="src\System\Collision\Collision.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\GraphFactory\GraphFactory.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\System\Image\Image.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

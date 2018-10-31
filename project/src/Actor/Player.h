@@ -12,9 +12,9 @@
 class Player : public Node
 {
 	Image image_;
-	Move* move_;
+	MoveBase* move_;
 public:
-	Player(const std::string& path, Move* move);
+	Player(const std::string& path, MoveBase* move);
 	~Player();
 
 	void init() override;

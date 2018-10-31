@@ -2,38 +2,41 @@
 #include "../../Scene/GameManager.h"
 
 
-Move::Move(Math::Vec& pos, float speed)
+MoveBase::MoveBase(const Math::Vec& pos, const float speed, const bool gravity)
 	:
 	pos_(pos),
-	speed_(speed)
-{
-}
+	speed_(speed),
+	isGravity_(gravity),
+	gravity_(-9.8f)
+{}
 
 
-Move::~Move()
-{
-}
+MoveBase::~MoveBase()
+{}
 
-Math::Vec& Move::getPos(){
+Math::Vec& MoveBase::getPos() {
 	return pos_;
 }
 
-InputMove::InputMove(Math::Vec& pos, float speed)
+//void InputMove::move(){
+//	if (game->kb.On(LEFT)) {
+//		pos_.x -= speed_;
+//	}
+//	if (game->kb.On(RIGHT)) {
+//		pos_.x += speed_;
+//	}
+//	if (game->kb.On(UP)) {
+//		pos_.y -= speed_;
+//	}
+//	if (game->kb.On(DOWN)) {
+//		pos_.y += speed_;
+//	}
+//}
+
+PlayerMove::PlayerMove(const Math::Vec & pos, const float speed, const bool gravity)
 	:
-	Move(pos, speed)
+	MoveBase(pos, speed, gravity)
 {}
 
-void InputMove::move(){
-	if (game->kb.On(LEFT)) {
-		pos_.x -= speed_;
-	}
-	if (game->kb.On(RIGHT)) {
-		pos_.x += speed_;
-	}
-	if (game->kb.On(UP)) {
-		pos_.y -= speed_;
-	}
-	if (game->kb.On(DOWN)) {
-		pos_.y += speed_;
-	}
+void PlayerMove::move() {
 }
