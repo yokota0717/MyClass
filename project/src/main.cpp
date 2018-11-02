@@ -37,8 +37,8 @@ void DXinit() {
 		ChangeWindowMode(1);
 	}
 #endif
-	SetDrawScreen(DX_SCREEN_BACK);	//ó†âÊñ ê›íË
 	DxLib_Init();
+	SetDrawScreen(DX_SCREEN_BACK);	//ó†âÊñ ê›íË
 }
 //-------------------------------------------------------------------------------------------------------------------
 
